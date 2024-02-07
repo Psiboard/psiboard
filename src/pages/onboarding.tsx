@@ -27,7 +27,7 @@ export function Onboarding() {
         <div className="w-[50%] justify-start">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-3xl font-bold tracking-tight  sm:text-5xl">
-              AgendaPSI, é praticidade
+              PsiBoard, é praticidade
             </h2>
             <p className="mt-6 text-lg leading-8">
               Centralize os atendimentos do seu consultório em um só lugar e
