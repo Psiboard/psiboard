@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root{
+  @apply font-poppins
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+   @apply bg-[#dddfeb];
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  @apply w-[5px];
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-[#00a5ab] rounded-lg;
+}
