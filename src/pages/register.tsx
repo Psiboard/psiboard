@@ -12,7 +12,7 @@ export function Register() {
             className="h-16 w-auto cursor-pointer"
           />
           <h1 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">
-            Comece hoje no AgendaPSI
+            Comece hoje no PsiBoard
           </h1>
         </div>
 
