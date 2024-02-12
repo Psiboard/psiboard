@@ -1,7 +1,45 @@
+import React, { useState } from "react";
+import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 
+const loginSchema = z.object({
+  email: z.string().email("Por favor, insira um endereço de e-mail válido."),
+  password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres."),
+});
+
 export function Login() {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formError, setFormError] = useState<ZodError | null>(null);
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      // Validar os dados do formulário com Zod
+      const validatedData = loginSchema.parse(formData);
+      console.log("Dados válidos:", validatedData);
+      // Aqui você pode fazer a lógica para enviar os dados de login para o servidor
+      // Por exemplo, enviar uma requisição para autenticação
+      // fetch('url_do_seu_endpoint_de_login', { method: 'POST', body: JSON.stringify(validatedData) })
+      alert("Logou");
+      setFormData({email: "", password: ""});
+      setFormError(null);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        // Se ocorrer um erro de validação, atualize o estado com os erros
+        setFormError(error);
+      }
+    }
+  }
+
   return (
     <>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center">
@@ -16,9 +54,16 @@ export function Login() {
               Faça login na sua conta
             </h1>
           </div>
+          {formError?.errors.map((error, index) => (
+            <div className="flex justify-center">
+              <span key={index} className="text-red-500 font-medium rounded-md mt-4">
+                {error.message}
+              </span>
+            </div>
+          ))}
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
@@ -31,6 +76,8 @@ export function Login() {
                     id="email"
                     name="email"
                     type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     autoComplete="email"
                     placeholder="meu.email@example.com"
                     required
@@ -53,6 +100,8 @@ export function Login() {
                     id="password"
                     name="password"
                     type="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
                     autoComplete="current-password"
                     placeholder="********"
                     required

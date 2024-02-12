@@ -1,7 +1,42 @@
+import React, { useState } from "react";
+import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 
+const registerSchema = z.object({
+  name: z.string(),
+  email: z.string().email("Por favor, insira um endereço de e-mail válido."),
+  password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres."),
+});
+
 export function Register() {
+   const [formData, setFormData] = useState({ name:"", email: "", password: "" });
+   const [formError, setFormError] = useState<ZodError | null>(null);
+
+   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+     const { name, value } = e.target;
+     setFormData((prevData) => ({
+       ...prevData,
+       [name]: value,
+     }));
+   }
+
+   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+     e.preventDefault();
+     try {
+       // Validar os dados do formulário com Zod
+       const validatedData = registerSchema.parse(formData);
+       console.log("Dados válidos:", validatedData);
+       alert("Cadastrou");
+       setFormData({ name:"", email: "", password: "" });
+       setFormError(null);
+     } catch (error) {
+       if (error instanceof ZodError) {
+         // Se ocorrer um erro de validação, atualize o estado com os erros
+         setFormError(error);
+       }
+     }
+   }
   return (
     <>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,8 +51,19 @@ export function Register() {
           </h1>
         </div>
 
+        {formError?.errors.map((error, index) => (
+          <div className="flex justify-center">
+            <span
+              key={index}
+              className="text-red-500 font-medium rounded-md mt-4"
+            >
+              {error.message}
+            </span>
+          </div>
+        ))}
+
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="nome"
@@ -27,9 +73,11 @@ export function Register() {
               </label>
               <div className="mt-2">
                 <input
-                  id="nome"
-                  name="nome"
+                  id="name"
+                  name="name"
                   type="text"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   autoComplete="nome"
                   placeholder="João da Silva"
                   required
@@ -50,6 +98,8 @@ export function Register() {
                   id="email"
                   name="email"
                   type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   autoComplete="email"
                   placeholder="meu.email@example.com"
                   required
@@ -72,6 +122,8 @@ export function Register() {
                   id="password"
                   name="password"
                   type="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
                   autoComplete="current-password"
                   placeholder="********"
                   required
