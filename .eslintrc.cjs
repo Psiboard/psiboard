@@ -19,5 +19,6 @@ module.exports = {
       { vars: "all", args: "after-used", ignoreRestSiblings: false },
     ],
     semi: ["error", "always"],
+    "@typescript-eslint/no-explicit-any":["warn", "always"],
   },
 };

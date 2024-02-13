@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 // Definição do tipo para os parâmetros da requisição
 type RequestOptions = {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE"; // Adicione outros métodos conforme necessário
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"; // Adicione outros métodos conforme necessário
   headers?: any; // Tipo genérico para os headers
   dependencies?: any[]; // Dependências para casos de useEffect com dependências
 };
