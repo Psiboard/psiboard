@@ -5,11 +5,12 @@ import { statisticsData } from "../mocks";
 const data = [1, 2, 3, 4, 5];
 
 export function Dashboard() {
+
   const [selectedDay, setSelectedDay] = useState<Date>();
   const footer = selectedDay ? (
     <p>You selected {format(selectedDay, "dd/MM/yyyy")}.</p>
   ) : null;
-console.log(statisticsData);
+
   return (
     <div className="p-5">
       <h1 className="text-3xl font-bold text-gray-700 mb-10">

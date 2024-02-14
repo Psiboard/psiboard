@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
+import { useAuth } from "../hooks/auth";
 
 const loginSchema = z.object({
   email: z.string().email("Por favor, insira um endereço de e-mail válido."),
-  password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres."),
+  password: z.string()
 });
 
 export function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [formError, setFormError] = useState<ZodError | null>(null);
+  const {signIn} = useAuth();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -24,17 +26,12 @@ export function Login() {
     e.preventDefault();
     try {
       // Validar os dados do formulário com Zod
-      const validatedData = loginSchema.parse(formData);
-      console.log("Dados válidos:", validatedData);
-      // Aqui você pode fazer a lógica para enviar os dados de login para o servidor
-      // Por exemplo, enviar uma requisição para autenticação
-      // fetch('url_do_seu_endpoint_de_login', { method: 'POST', body: JSON.stringify(validatedData) })
-      alert("Logou");
+      loginSchema.parse(formData);
+      signIn(formData);
       setFormData({email: "", password: ""});
       setFormError(null);
     } catch (error) {
       if (error instanceof ZodError) {
-        // Se ocorrer um erro de validação, atualize o estado com os erros
         setFormError(error);
       }
     }

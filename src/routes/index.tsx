@@ -9,7 +9,7 @@ export function RouteApp () {
       <Route path="/" element={<Onboarding />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/dashboard/*" element={<ProtectedRoute isAuth={true} />}>
+      <Route path="/dashboard/*" element={<ProtectedRoute/>}>
         <Route element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="schedules" element={<Schedules />} />
