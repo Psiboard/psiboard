@@ -1,5 +1,3 @@
-export const BASE_URL = "http://localhost:3000";
-
 export const formatDate = (date: any) => {
   const dia = String(date.getDate()).padStart(2, "0");
   const mes = String(date.getMonth() + 1).padStart(2, "0");
