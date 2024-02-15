@@ -1,4 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
+import Cookies from "js-cookie";
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -44,13 +46,14 @@ export function AuthProvider({ children }: IAuthProvider) {
     "20",
     "21",
   ];
-  const [user, setUser] = useState(() => {
-    const user = localStorage.getItem("user@data");
-    if (user) {
-      return JSON.parse(user);
-    }
-    return {};
-  });
+ const [user, setUser] = useState(() => {
+   const user = Cookies.get("user@data");
+   if (user) {
+     return JSON.parse(user);
+   }
+   return {};
+ });
+
   // Variavel de controle de usuário logado
   const isAuthenticated = !!user && Object.keys(user).length !== 0;
   const navigate = useNavigate();
@@ -61,14 +64,13 @@ export function AuthProvider({ children }: IAuthProvider) {
         email: email,
         password: password,
       });
-      console.log(data);
       const userData = {
         email: data.email,
         nome: data.name,
         id: data.id,
       };
-      localStorage.setItem("user@data", JSON.stringify(userData));
-      localStorage.setItem("token@data", data.access_token);
+      Cookies.set("user@data", JSON.stringify(userData));
+      Cookies.set("token@data", data.access_token);
       navigate("/dashboard");
       toast.success(`Seja bem vindo(a), ${userData.nome}`);
       setUser(userData);
@@ -78,8 +80,8 @@ export function AuthProvider({ children }: IAuthProvider) {
     }
   }
    function signOut() {
-     localStorage.removeItem("user@data");
-     localStorage.removeItem("token@data");
+     Cookies.remove("user@data");
+     Cookies.remove("token@data");
      navigate("/");
    }
 
