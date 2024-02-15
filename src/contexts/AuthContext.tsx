@@ -2,6 +2,7 @@ import { ReactNode, createContext, useState } from "react";
 import Cookies from "js-cookie";
 
 import axios from "axios";
+import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils";
@@ -60,7 +61,7 @@ export function AuthProvider({ children }: IAuthProvider) {
 
   async function signIn({ email, password }: ISignIn) {
     try {
-      const { data } = await axios.post(`${BASE_URL}/auth/login`, {
+      const { data } = await api.post(`/auth/login`, {
         email: email,
         password: password,
       });
