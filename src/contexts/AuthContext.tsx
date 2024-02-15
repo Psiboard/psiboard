@@ -1,11 +1,8 @@
 import { ReactNode, createContext, useState } from "react";
 import Cookies from "js-cookie";
-
-import axios from "axios";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils";
 
 interface IAuthProvider {
   children: ReactNode;
