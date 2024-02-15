@@ -5,16 +5,16 @@ import custome from "../assets/custome.png";
 export function Onboarding() {
   return (
     <>
-      <nav className="flex justify-between items-center py-4 px-8 text-white">
+      <nav className="sm:flex justify-between items-center py-4 px-8 text-white">
         <div className="flex items-center">
           <img
             src={custome}
             alt="Logo"
-            className="h-16 w-auto cursor-pointer"
+            className="h-16 w-auto cursor-pointer mb-5"
           />
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="sm:flex items-center space-x-4">
           <button className="px-4 py-1 bg-[#02969c] text-[#fff] font-semibold rounded">
             <Link to="/login">Fazer Login</Link>
           </button>
@@ -23,8 +23,8 @@ export function Onboarding() {
           </button>
         </div>
       </nav>
-      <div className="flex justify-between items-center pr-4 pl-8 pt-0 w-full">
-        <div className="w-[50%] justify-start">
+      <div className="flex sm:justify-between flex-col sm:flex-row items-center pr-4 pl-8 pt-0 w-full">
+        <div className="sm:w-[50%] sm:mt-0 mt-5 justify-start">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-3xl font-bold tracking-tight  sm:text-5xl">
               PsiBoard, é praticidade
@@ -44,7 +44,7 @@ export function Onboarding() {
           <img
             src={onboarding}
             alt="Imagem"
-            className="h-[500px] w-auto object-contain justify-end"
+            className="sm:flex hidden h-[500px] w-auto object-contain justify-end"
           />
         </div>
       </div>
