@@ -11,7 +11,7 @@ export function Dashboard() {
   const { user } = useAuth();
   const formatedDate = formatDate(new Date());
   const [scheduleDate, setScheduleDate] = useState<string>(formatedDate);
-  
+
   const [schedules, isLoading] = useFetch({
     url: `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
     method: "GET",
@@ -27,6 +27,7 @@ export function Dashboard() {
       <h1 className="text-3xl font-bold text-gray-700 mb-10">
         Bem vindo, {user.nome}
       </h1>
+
       <div className="flex items-center justify-between mt-4">
         {statisticsData.map((item) => (
           <>
@@ -51,7 +52,7 @@ export function Dashboard() {
 
       <div className="mt-10">
         <p className="text-xl mb-3 text-gray-700">Seus agendamentos do dia</p>
-        {isLoading && <Loading type="spinner"/>}
+        {isLoading && <Loading type="spinner" />}
         <div className="flex w-full h-[400px]">
           <div className="w-[50%] flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
             {schedules && (
