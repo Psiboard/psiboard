@@ -38,7 +38,7 @@ export function Login() {
   }
 
   return (
-    <>
+    <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center">
         <div>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
@@ -53,7 +53,10 @@ export function Login() {
           </div>
           {formError?.errors.map((error, index) => (
             <div className="flex justify-center">
-              <span key={index} className="text-red-500 font-medium rounded-md mt-4">
+              <span
+                key={index}
+                className="text-red-500 font-medium rounded-md mt-4"
+              >
                 {error.message}
               </span>
             </div>
@@ -134,6 +137,6 @@ export function Login() {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

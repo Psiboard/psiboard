@@ -38,7 +38,7 @@ export function Register() {
      }
    }
   return (
-    <>
+    <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className=" flex flex-col items-center">
           <img
@@ -158,6 +158,6 @@ export function Register() {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

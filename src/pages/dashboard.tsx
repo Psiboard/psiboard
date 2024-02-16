@@ -3,8 +3,9 @@ import { DayPicker } from "react-day-picker";
 import { statisticsData } from "../mocks";
 import { useAuth } from "../hooks/auth";
 import useFetch from "../hooks/useFetch";
-import { formatDate, BASE_URL } from "../utils";
+import { formatDate, BASE_URL, fetchHeaders } from "../utils";
 import Loading from "../components/loading";
+import React from "react";
 
 export function Dashboard() {
   const [selectedDay, setSelectedDay] = useState<Date>();
@@ -15,6 +16,7 @@ export function Dashboard() {
   const [schedules, isLoading] = useFetch({
     url: `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
     method: "GET",
+    headers: fetchHeaders(),
     dependencies: [scheduleDate],
   });
 
@@ -30,7 +32,7 @@ export function Dashboard() {
 
       <div className="flex items-center justify-between mt-4">
         {statisticsData.map((item) => (
-          <>
+          <React.Fragment key={item.label}>
             <div className=" cursor-pointer w-[240px] flex flex-col gap-3 p-4 bg-white border border-gray-200 rounded-lg shadow ">
               <div
                 dangerouslySetInnerHTML={{ __html: item.icon }}
@@ -46,7 +48,7 @@ export function Dashboard() {
                 </h5>
               </div>
             </div>
-          </>
+          </React.Fragment>
         ))}
       </div>
 
@@ -56,9 +58,12 @@ export function Dashboard() {
         <div className="flex w-full h-[400px]">
           <div className="w-[50%] flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
             {schedules && (
-              <>
+              <React.Fragment>
                 {schedules.map((schedule: any) => (
-                  <div className="h-auto flex  items-center bg-gray-100 rounded-[8px] w-[100%] mb-3 mt-1 ">
+                  <div
+                    key={schedule.id}
+                    className="h-auto flex  items-center bg-gray-100 rounded-[8px] w-[100%] mb-3 mt-1 "
+                  >
                     <span className="bg-[#02969c] h-[100%] text-[#fff] flex items-center mr-4 p-[0.8rem] rounded-[8px_0_0_8px]">
                       {schedule.hour}h
                     </span>
@@ -117,7 +122,7 @@ export function Dashboard() {
                     </div>
                   </div>
                 ))}
-              </>
+              </React.Fragment>
             )}
 
             {schedules.length <= 0 && !isLoading && (

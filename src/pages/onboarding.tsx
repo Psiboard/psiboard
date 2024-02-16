@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import onboarding from "../assets/onboarding.png";
 import About from "../components/about-us";
 import custome from "../assets/custome.png";
+import React from "react";
 export function Onboarding() {
   return (
-    <>
+    <React.Fragment>
       <nav className="sm:flex justify-between items-center py-4 px-8 text-white">
         <div className="flex items-center">
           <img
@@ -51,6 +52,6 @@ export function Onboarding() {
       <div id="about">
         <About />
       </div>
-    </>
+    </React.Fragment>
   );
 }

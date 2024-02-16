@@ -2,6 +2,7 @@ import { Select } from "@chakra-ui/react";
 import { useState } from "react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
+import React from "react";
 
 export function Schedules() {
   const [selectedDay, setSelectedDay] = useState<Date>();
@@ -43,11 +44,11 @@ export function Schedules() {
                 onChange={(event) => console.log(event.target.value)}
               >
                 {patients.map((patient) => (
-                  <>
+                  <React.Fragment>
                     <option key={patient} value={patient}>
                       {patient}
                     </option>
-                  </>
+                  </React.Fragment>
                 ))}
               </Select>
             </div>
@@ -59,11 +60,11 @@ export function Schedules() {
                 onChange={(event) => console.log(event.target.value)}
               >
                 {schedules.map((schedules) => (
-                  <>
+                  <React.Fragment>
                     <option key={schedules} value={schedules}>
                       {schedules}
                     </option>
-                  </>
+                  </React.Fragment>
                 ))}
               </Select>
             </div>

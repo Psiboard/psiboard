@@ -11,24 +11,22 @@ import {
 } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import ModalEdit from "../components/modal-edit";
-import { useState } from "react";
+import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
-import { BASE_URL } from "../utils";
+import { BASE_URL, fetchHeaders } from "../utils";
 import { useAuth } from "../hooks/auth";
 
-
 export function PatientsList() {
-
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const [patientsList, isLoading] = useFetch({
     url: `${BASE_URL}/professional/${user.id}/patients`,
-    method: 'GET',
+    method: "GET",
+    headers: fetchHeaders(),
   });
 
-
   const [open, setIsOpen] = useState(false);
-  function onClose(){
+  function onClose() {
     setIsOpen(false);
   }
 
@@ -38,9 +36,8 @@ export function PatientsList() {
         Sua lista de pacientes
       </h1>
       <div>
-        <TableContainer>
+        <TableContainer className="custom-scrollbar">
           <Table variant="simple">
-            <TableCaption>Pacientes cadastrados</TableCaption>
             <Thead>
               <Tr>
                 <Th>Nome</Th>
@@ -52,26 +49,30 @@ export function PatientsList() {
               </Tr>
             </Thead>
             <Tbody>
-              {patientsList?.map((patient:any) => (
+              {patientsList?.map((patient: any) => (
                 <Tr>
-                  <>
+                  <React.Fragment>
                     <Td>{patient.name}</Td>
                     <Td>{patient.age}</Td>
                     <Td>{patient.email}</Td>
                     <Td>{patient.phone}</Td>
                     <Td>{patient.adress}</Td>
                     <Td className="flex gap-2">
-                      <Button colorScheme="teal" size="xs" onClick={()=>setIsOpen(true)}>
+                      <Button
+                        colorScheme="teal"
+                        size="xs"
+                        onClick={() => setIsOpen(true)}
+                      >
                         Editar
                       </Button>
                       <Button colorScheme="red" size="xs">
                         Excluir
                       </Button>
                     </Td>
-                  </>
+                  </React.Fragment>
                 </Tr>
               ))}
-              <ModalEdit isOpen={open} onClose={onClose}/>
+              <ModalEdit isOpen={open} onClose={onClose} />
             </Tbody>
             <Tfoot></Tfoot>
           </Table>

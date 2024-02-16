@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 import { useAuth } from "../hooks/auth";
+import React from "react";
 
 const items = [
   { name: "Cadastrar pacientes", link: "/dashboard/patients" },
@@ -22,20 +23,21 @@ export default function SideBar() {
         </Link>
         <ul>
           {items.map((item) => (
-            <>
+            <React.Fragment key={item.name}>
               <Link to={item.link}>
                 <li className="py-2 px-1 rounded-md hover:bg-[#07d6de]">
                   {item.name}
                 </li>
               </Link>
-            </>
+            </React.Fragment>
           ))}
         </ul>
       </div>
       <div>
         <button
           onClick={signOut}
-          className="px-4 py-2 w-[120px] bg-[#07d6de] text-gray-100 font-semibold rounded flex justify-center gap-1">
+          className="px-4 py-2 w-[120px] bg-[#22c3c8] text-gray-100 font-semibold rounded flex justify-center gap-1"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

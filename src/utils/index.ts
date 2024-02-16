@@ -11,7 +11,7 @@ export const formatDate = (date: any) => {
 };
 
 export const fetchHeaders = () => {
-  const token = Cookies.get("user@data");
+  const token = Cookies.get("token@data");
   const header = {
     Authorization: `Bearer ${token}`,
   };

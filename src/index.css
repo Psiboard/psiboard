@@ -7,11 +7,11 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-   @apply bg-[#dddfeb];
+   @apply bg-[#dddfeb] rounded-lg;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  @apply w-[5px];
+  @apply h-[12px];
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
