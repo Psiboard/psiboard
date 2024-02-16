@@ -1,24 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@chakra-ui/react";
+import { useAuth } from "../hooks/auth";
 
 export default function ModalEdit({isOpen, onClose}:any) {
-  const schedules = [
-    "07:00",
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-  ];
+  const {availableSchedules} = useAuth();
   if(isOpen){
      return (
        <div className="fixed inset-0 z-[9] bg-[rgb(0,0,0,0.3)] ">
@@ -61,8 +46,8 @@ export default function ModalEdit({isOpen, onClose}:any) {
                  id=""
                  className="border w-2/5 p-[0.3rem] rounded-[10px] border-solid"
                >
-                 {schedules
-                   ? schedules.map((hora: any, index: any) => {
+                 {availableSchedules
+                   ? availableSchedules.map((hora: any, index: any) => {
                        return (
                          <option value={hora} key={index}>
                            {hora}
