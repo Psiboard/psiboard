@@ -1,22 +1,15 @@
-/*
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { useForm } from "react-hook-form";
 
 export function Patients() {
+  const { register, handleSubmit, reset } = useForm();
+
+  function onSubmit(data: any) {
+    console.log(data);
+    reset();
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-12 p-10">
         <div className="border-b border-gray-900/10 pb-12">
           <h1 className="text-2xl font-semibold leading-7 text-gray-900">
@@ -43,9 +36,11 @@ export function Patients() {
               <div className="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
-                  autoComplete="given-name"
+                  id="name"
+                  autoComplete="name"
+                  placeholder="Ex: José da Silva"
+                  {...register("name", { required: true })}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -61,14 +56,16 @@ export function Patients() {
               <div className="mt-2">
                 <input
                   type="number"
-                  name="age"
                   id="age"
+                  placeholder="Ex: 20"
+                  {...register("age", { required: true })}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -78,9 +75,11 @@ export function Patients() {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
+                  placeholder="Ex: jose.silva@teste.com"
+                  {...register("email", { required: true })}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -95,9 +94,11 @@ export function Patients() {
               </label>
               <div className="mt-2">
                 <input
-                  type="number"
-                  name="age"
-                  id="age"
+                  type="text"
+                  id="phone"
+                  placeholder="Use o formato (XX) XXXXX-XXXX"
+                  {...register("phone", { required: true })}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -113,9 +114,11 @@ export function Patients() {
               <div className="mt-2">
                 <input
                   type="text"
-                  name="street-address"
-                  id="street-address"
-                  autoComplete="street-address"
+                  id="address"
+                  autoComplete="address"
+                  placeholder="Ex: Rua jardim de orquideas, n°0, Bairro das Flores, Cidade-Estado"
+                  {...register("adress", { required: true })}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -131,34 +134,16 @@ export function Patients() {
               <div className="mt-2">
                 <input
                   type="text"
-                  name="postal-code"
-                  id="postal-code"
-                  autoComplete="postal-code"
+                  id="zip_code"
+                  autoComplete="zip_code"
+                  placeholder="Ex: 01001-900"
+                  {...register("zip_code", { required: true })}
+                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="country"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Some options to select
-              </label>
-              <div className="mt-2">
-                <select
-                  id="country"
-                  name="country"
-                  autoComplete="country-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                >
-                  <option>Something</option>
-                  <option>Something</option>
-                  <option>Something</option>
-                </select>
-              </div>
-            </div>
             <div className="col-span-full">
               <label
                 htmlFor="about"
@@ -168,9 +153,10 @@ export function Patients() {
               </label>
               <div className="mt-2">
                 <textarea
-                  id="about"
-                  name="about"
+                  id="info_add"
                   rows={3}
+                  placeholder="Use esse campo para adicionar informações que considere relevantes sobre o paciente"
+                  {...register("info_add", { required: true })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   defaultValue={""}
                 />
