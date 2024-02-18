@@ -1,11 +1,31 @@
 import React from "react";
 import { useState } from "react";
 import ModalEdit from "./modal-edit";
+import api from "../services/api";
+import { toast } from "react-toastify";
 
-export default function Card({ scheduleId, patientId, hour, name, date, phone }: any) {
+export default function Card({
+  scheduleId,
+  patientId,
+  hour,
+  name,
+  date,
+  phone,
+}: any) {
   const [open, setOpen] = useState(false);
   function handleClose() {
     setOpen(false);
+  }
+
+  function handleDelete(id: string) {
+    api.delete(`/scheduling/${id}`)
+    .then(()=>{
+      toast.success("Agendamento deletado com sucesso!")
+      window.location.reload();
+    })
+    .catch(()=>{
+      toast.error("Algo deu errado ao tentar excluir :(");
+    })
   }
 
   return (
@@ -40,7 +60,7 @@ export default function Card({ scheduleId, patientId, hour, name, date, phone }:
                 />
               </svg>
             </span>
-            <span className="cursor-pointer" onClick={() => alert("Removeu")}>
+            <span className="cursor-pointer" onClick={() => handleDelete(scheduleId)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
