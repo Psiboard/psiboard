@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
-import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/useAuth";
 import React from "react";
 
 const items = [

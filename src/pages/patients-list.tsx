@@ -6,15 +6,13 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import ModalEdit from "../components/modal-edit";
-import React, { useState } from "react";
+import React from "react";
 import useFetch from "../hooks/useFetch";
 import { BASE_URL, fetchHeaders } from "../utils";
-import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/useAuth";
 
 export function PatientsList() {
   const { user } = useAuth();
@@ -25,10 +23,6 @@ export function PatientsList() {
     headers: fetchHeaders(),
   });
 
-  const [open, setIsOpen] = useState(false);
-  function onClose() {
-    setIsOpen(false);
-  }
 
   return (
     <div className="p-5">
@@ -61,7 +55,7 @@ export function PatientsList() {
                       <Button
                         colorScheme="teal"
                         size="xs"
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => alert('Editou')}
                       >
                         Editar
                       </Button>
@@ -72,7 +66,6 @@ export function PatientsList() {
                   </React.Fragment>
                 </Tr>
               ))}
-              <ModalEdit isOpen={open} onClose={onClose} />
             </Tbody>
             <Tfoot></Tfoot>
           </Table>

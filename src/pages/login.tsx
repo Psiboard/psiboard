@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
-import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/useAuth";
 
 const loginSchema = z.object({
   email: z.string().email("Por favor, insira um endereço de e-mail válido."),

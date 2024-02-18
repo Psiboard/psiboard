@@ -1,11 +1,30 @@
 import { useForm } from "react-hook-form";
+import { isAxiosError } from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import api from "../services/api";
+import { useAuth } from "../hooks/useAuth";
 
 export function Patients() {
-  const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+  const { user } = useAuth();
 
-  function onSubmit(data: any) {
-    console.log(data);
-    reset();
+  function onSubmit(formData: any) {
+    const id = user.id;
+    const body = { ...formData, professional: id };
+    api
+      .post("/patient", body)
+      .then(() => {
+        toast.success("Paciente cadastrado com sucesso!");
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        if (isAxiosError(error)) {
+          toast.error(error.response?.data.message);
+          console.log(error);
+        }
+      });
   }
 
   return (
