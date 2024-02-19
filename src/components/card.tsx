@@ -45,18 +45,18 @@ export default function Card({
     <React.Fragment>
       <div
         key={scheduleId}
-        className="h-auto flex  items-center bg-gray-100 rounded-[8px] w-[100%] mb-3 mt-1 "
+        className="h-auto md:gap-0 gap-5 flex md:flex-row flex-col items-center bg-gray-100 rounded-[8px] w-[100%] mb-3 mt-1 "
       >
-        <span className="bg-[#02969c] h-[100%] text-[#fff] flex items-center mr-4 p-[0.8rem] rounded-[8px_0_0_8px]">
+        <span className="bg-[#02969c] sm:h-[120px] h-[80px] md:w-auto w-full text-[#fff] flex items-center md:mr-4 p-[0.8rem] md:rounded-[8px_0_0_8px] rounded-md">
           {hour}h
         </span>
-        <div className="flex justify-between items-center w-full">
+        <div className="flex md:flex-row flex-col justify-between md:items-center w-full md:p-0 px-2">
           <div className="flex flex-col gap-1 py-2">
             <p className="text-gray-700 text-[1.2rem]">{name}</p>
             <p className="text-gray-700 text-[1.2rem]">{date}</p>
             <p className="text-gray-700 text-[1.2rem]">Telefone: {phone}</p>
           </div>
-          <div className="flex flex-col mr-5 gap-5">
+          <div className="flex md:flex-col md:mr-5 gap-5 md:py-0 py-3 md:justify-center justify-around">
             <span className="cursor-pointer" onClick={() => setOpen(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

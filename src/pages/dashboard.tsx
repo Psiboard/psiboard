@@ -25,14 +25,16 @@ export function Dashboard() {
 
   return (
     <div className="p-5">
-      <h1 className="text-3xl font-bold text-gray-700 mb-10">
-        Bem vindo, {user.nome}
-      </h1>
+      <div>
+        <h1 className="text-3xl font-bold text-gray-700 mb-10 text-center">
+          Bem vindo, {user.nome}
+        </h1>
+      </div>
 
-      <div className="flex items-center justify-between mt-4">
+      <div className="flex md:flex-row flex-col lg:items-center items-start justify-between mt-4">
         {statisticsData.map((item) => (
           <React.Fragment key={item.label}>
-            <div className=" cursor-pointer w-[240px] flex flex-col gap-3 p-4 bg-white border border-gray-200 rounded-lg shadow ">
+            <div className=" cursor-pointer md:w-[240px] w-[100%] md:mb-0 mb-3 flex flex-col justify-start gap-3 p-4 bg-white border border-gray-200 rounded-lg shadow ">
               <div
                 dangerouslySetInnerHTML={{ __html: item.icon }}
                 className="h-8"
@@ -54,8 +56,8 @@ export function Dashboard() {
       <div className="mt-10">
         <p className="text-xl text-gray-700">Seus agendamentos do dia</p>
         {isLoading && <Loading type="spinner" />}
-        <div className="flex w-full h-[400px]">
-          <div className="w-[50%] flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
+        <div className="flex w-full md:h-auto md:flex-row flex-col md:gap-0 gap-10 md:items-start items-center md:mt-0 mt-5">
+          <div className="md:w-[50%] w-full flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
             {schedules && (
               <React.Fragment>
                 {schedules.map((schedule: any) => (
@@ -77,22 +79,24 @@ export function Dashboard() {
               </h3>
             )}
           </div>
-          <div className="w-[50%] flex flex-col items-center">
-            <DayPicker
-              className="bg-[#00a5ab] shadow-[4px_8px_4px_rgb(0,0,0,0.3)] p-4 rounded-[10px] w-auto items-center flex justify-center"
-              classNames={{
-                day: "w-10 h-10 text text-[#fff] m-[0.15rem] rounded-[5px]",
-                month: "text-[#fff]",
-                caption: "mb-4",
-              }}
-              modifiersClassNames={{
-                selected: "text-[#017377] bg-[#0dcdd4]",
-              }}
-              mode="single"
-              onSelect={setSelectedDay}
-              onDayClick={handleChangeCalendarDay}
-              selected={selectedDay}
-            />
+          <div className="md:w-[50%] w-full flex flex-col items-center">
+            <div className="md:w-auto w-full">
+              <DayPicker
+                className="bg-[#00a5ab] shadow-[4px_8px_4px_rgb(0,0,0,0.3)] p-4 rounded-[10px] w-auto items-center flex justify-center"
+                classNames={{
+                  day: "sm:w-10 w-8 h-10 text text-[#fff] m-[0.15rem] rounded-[5px]",
+                  month: "text-[#fff]",
+                  caption: "mb-4",
+                }}
+                modifiersClassNames={{
+                  selected: "text-[#017377] bg-[#0dcdd4]",
+                }}
+                mode="single"
+                onSelect={setSelectedDay}
+                onDayClick={handleChangeCalendarDay}
+                selected={selectedDay}
+              />
+            </div>
           </div>
         </div>
       </div>

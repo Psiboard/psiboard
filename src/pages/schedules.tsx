@@ -96,13 +96,13 @@ export function Schedules() {
 
   return (
     <div className="p-5">
-      <h1 className="text-3xl font-bold text-gray-700 mb-10">
+      <h1 className="text-3xl font-bold text-gray-700 mb-10 text-center">
         Agende o horário
       </h1>
 
       <div>
-        <div className="flex w-full justify-between">
-          <div className="w-[50%] flex flex-col gap-5 py-5 px-3 rounded-sm">
+        <div className="flex md:flex-row flex-col-reverse w-full justify-between">
+          <div className="w-[50%] flex flex-col md:gap-5 gap-10 py-5 md:px-3 rounded-sm">
             <div>
               <label>Paciente</label>
               <Select

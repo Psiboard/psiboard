@@ -6,10 +6,10 @@ export default function DashboardLayout() {
   return (
     <React.Fragment>
       <div className="flex gap-2">
-        <div className="flex w-[20%]">
+        <div className="flex lg:w-[20%] w-0">
           <SideBar />
         </div>
-        <div className="flex-col w-[80%]">
+        <div className="flex-col lg:w-[80%] w-full">
           <Outlet />
         </div>
       </div>

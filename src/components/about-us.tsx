@@ -20,9 +20,9 @@ export default function About() {
       >
         <div />
       </div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-4xl font-bold tracking-tight text-[#000] sm:text-6xl">
+      <div className="mx-0 max-w-7xl px-6 lg:px-8">
+        <div className="max-w-2xl mx-0">
+          <h2 className="text-4xl font-bold tracking-tight text-[#000] sm:text-6xl text-center sm:text-start">
             Nossa missão
           </h2>
           <p className="mt-6 text-lg leading-8 text-[#000] font-normal">
@@ -32,7 +32,7 @@ export default function About() {
           </p>
         </div>
         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-          <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="flex flex-col gap-3 lg:flex-row lg:justify-between justify-start">
             {stats.map((stat) => (
               <div key={stat.name} className="flex flex-col-reverse">
                 <dt className="text-base leading-7 text-[#000]-300">

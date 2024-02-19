@@ -6,7 +6,7 @@ import React from "react";
 export function Onboarding() {
   return (
     <React.Fragment>
-      <nav className="sm:flex justify-between items-center py-4 px-8 text-white">
+      <nav className="sm:flex flex sm:flex-row flex-col justify-between items-center py-4 px-8 sm:mb-0 mb-10 text-white">
         <div className="flex items-center">
           <img
             src={custome}
@@ -24,10 +24,10 @@ export function Onboarding() {
           </button>
         </div>
       </nav>
-      <div className="flex sm:justify-between flex-col sm:flex-row items-center pr-4 pl-8 pt-0 w-full">
+      <div className="flex sm:justify-between flex-col sm:flex-row text-center sm:text-start  items-center sm:pr-4 sm:pl-8 px-5 pt-0 w-full">
         <div className="sm:w-[50%] sm:mt-0 mt-5 justify-start">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight  sm:text-5xl">
+            <h2 className="font-bold tracking-tight text-5xl text-center sm:text-start">
               PsiBoard, é praticidade
             </h2>
             <p className="mt-6 text-lg leading-8">
