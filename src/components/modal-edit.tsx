@@ -45,7 +45,10 @@ export default function ModalEdit({
       patient: patientId,
       professional: user.id,
     };
-    console.log(data);
+    if (Object.values(data).some((value) => value === "")) {
+      toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
+      return;
+    }
     api
       .patch(`/scheduling/${scheduleId}`, data)
       .then(() => {

@@ -1,8 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import ModalEdit from "./modal-edit";
 import api from "../services/api";
 import { toast } from "react-toastify";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 export default function Card({
   scheduleId,
@@ -12,20 +22,23 @@ export default function Card({
   date,
   phone,
 }: any) {
+  const cancelRef = useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
   function handleClose() {
     setOpen(false);
   }
 
   function handleDelete(id: string) {
-    api.delete(`/scheduling/${id}`)
-    .then(()=>{
-      toast.success("Agendamento deletado com sucesso!")
-      window.location.reload();
-    })
-    .catch(()=>{
-      toast.error("Algo deu errado ao tentar excluir :(");
-    })
+    api
+      .delete(`/scheduling/${id}`)
+      .then(() => {
+        toast.success("Agendamento deletado com sucesso!");
+        window.location.reload();
+      })
+      .catch(() => {
+        toast.error("Algo deu errado ao tentar excluir :(");
+      });
   }
 
   return (
@@ -60,7 +73,11 @@ export default function Card({
                 />
               </svg>
             </span>
-            <span className="cursor-pointer" onClick={() => handleDelete(scheduleId)}>
+            <span
+              className="cursor-pointer"
+              // onClick={() => handleDelete(scheduleId)}
+              onClick={onOpen}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -89,6 +106,37 @@ export default function Card({
         date={date}
         phone={phone}
       />
+
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Deletar agendamento
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Tem certeza que deseja excluir ? Essa ação é irreversivel.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancelar
+              </Button>
+              <Button
+                colorScheme="red"
+                onClick={() => handleDelete(scheduleId)}
+                ml={3}
+              >
+                Deletar
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </React.Fragment>
   );
 }
