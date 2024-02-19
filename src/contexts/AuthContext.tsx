@@ -67,8 +67,8 @@ export function AuthProvider({ children }: IAuthProvider) {
         nome: data.name,
         id: data.id,
       };
-      Cookies.set("user@data", JSON.stringify(userData));
-      Cookies.set("token@data", data.access_token);
+      Cookies.set("user@data", JSON.stringify(userData), { expires: 1 / 24 });
+      Cookies.set("token@data", data.access_token, { expires:  1 /  24 });
       navigate("/dashboard");
       toast.success(`Seja bem vindo(a), ${userData.nome}`);
       setUser(userData);
