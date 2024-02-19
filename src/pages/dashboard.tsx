@@ -26,7 +26,7 @@ export function Dashboard() {
   return (
     <div className="p-5">
       <div>
-        <h1 className="text-3xl font-bold text-gray-700 mb-10 text-center">
+        <h1 className="text-3xl font-bold text-gray-700 mb-10 lg:text-start text-center">
           Bem vindo, {user.nome}
         </h1>
       </div>
