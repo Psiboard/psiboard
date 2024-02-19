@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { z, ZodError } from "zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import custome from "../assets/custome.png";
+import api from "../services/api";
+import { toast } from "react-toastify";
 
 const registerSchema = z.object({
   name: z.string(),
@@ -10,33 +12,43 @@ const registerSchema = z.object({
 });
 
 export function Register() {
-   const [formData, setFormData] = useState({ name:"", email: "", password: "" });
-   const [formError, setFormError] = useState<ZodError | null>(null);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [formError, setFormError] = useState<ZodError | null>(null);
 
-   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-     const { name, value } = e.target;
-     setFormData((prevData) => ({
-       ...prevData,
-       [name]: value,
-     }));
-   }
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
 
-   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-     e.preventDefault();
-     try {
-       // Validar os dados do formulário com Zod
-       const validatedData = registerSchema.parse(formData);
-       console.log("Dados válidos:", validatedData);
-       alert("Cadastrou");
-       setFormData({ name:"", email: "", password: "" });
-       setFormError(null);
-     } catch (error) {
-       if (error instanceof ZodError) {
-         // Se ocorrer um erro de validação, atualize o estado com os erros
-         setFormError(error);
-       }
-     }
-   }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      // Validar os dados do formulário com Zod
+      const validatedData = registerSchema.parse(formData);
+      console.log("Dados válidos:", validatedData);
+      api
+        .post("/professional", validatedData)
+        .then(() => {
+          toast.success("Cadastro realizado com sucesso! Entre na sua conta");
+          navigate("/");
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        setFormError(error);
+      }
+    }
+  }
   return (
     <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">

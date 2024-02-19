@@ -39,7 +39,7 @@ export function PatientsList() {
                 <Th>Email</Th>
                 <Th>Telefone</Th>
                 <Th>Endereço</Th>
-                <Th>Ações</Th>
+                {/* <Th>Ações</Th> */}
               </Tr>
             </Thead>
             <Tbody>
@@ -51,7 +51,7 @@ export function PatientsList() {
                     <Td>{patient.email}</Td>
                     <Td>{patient.phone}</Td>
                     <Td>{patient.adress}</Td>
-                    <Td className="flex gap-2">
+                    {/* <Td className="flex gap-2">
                       <Button
                         colorScheme="teal"
                         size="xs"
@@ -62,7 +62,7 @@ export function PatientsList() {
                       <Button colorScheme="red" size="xs">
                         Excluir
                       </Button>
-                    </Td>
+                    </Td> */}
                   </React.Fragment>
                 </Tr>
               ))}

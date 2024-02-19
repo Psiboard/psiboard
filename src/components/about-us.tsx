@@ -1,8 +1,8 @@
 const stats = [
   { name: "Escritórios atendidos", value: "10" },
-  { name: "Profissionais cadastrados", value: "10+" },
-  { name: "Marcações diárias", value: "10+" },
-  { name: "Que cabe no seu bolso", value: "Mensalidade" },
+  { name: "Profissionais cadastrados", value: "10" },
+  { name: "Marcações diárias", value: "10" },
+  { name: "em um só lugar", value: "Agendamentos" },
 ];
 
 export default function About() {

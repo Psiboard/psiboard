@@ -77,6 +77,7 @@ export function Schedules() {
     };
     if (Object.values(body).some((value) => value === "")) {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
+      return;
     }
     console.log(body);
     api

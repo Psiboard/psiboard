@@ -52,7 +52,7 @@ export function Dashboard() {
       </div>
 
       <div className="mt-10">
-        <p className="text-xl mb-3 text-gray-700">Seus agendamentos do dia</p>
+        <p className="text-xl text-gray-700">Seus agendamentos do dia</p>
         {isLoading && <Loading type="spinner" />}
         <div className="flex w-full h-[400px]">
           <div className="w-[50%] flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
