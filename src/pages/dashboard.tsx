@@ -1,24 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { statisticsData } from "../mocks";
 import { useAuth } from "../hooks/useAuth";
-import useFetch from "../hooks/useFetch";
 import { formatDate, BASE_URL, fetchHeaders } from "../utils";
 import Loading from "../components/loading";
 import React from "react";
 import Card from "../components/card";
+import api from "../services/api";
 
 export function Dashboard() {
   const [selectedDay, setSelectedDay] = useState<Date>();
   const { user } = useAuth();
   const formatedDate = formatDate(new Date());
   const [scheduleDate, setScheduleDate] = useState<string>(formatedDate);
-  const [schedules, isLoading] = useFetch({
-    url: `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
-    method: "GET",
-    headers: fetchHeaders(),
-    dependencies: [scheduleDate],
-  });
+  const [schedules, setSchedules] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await api.get(
+          `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
+          { headers: fetchHeaders() },
+        );
+        setSchedules(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [scheduleDate]);
+
   function handleChangeCalendarDay(date: any) {
     setScheduleDate(formatDate(date));
   }

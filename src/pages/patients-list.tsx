@@ -8,21 +8,29 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
-import React from "react";
-import useFetch from "../hooks/useFetch";
+import React, { useEffect, useState } from "react";
 import { BASE_URL, fetchHeaders } from "../utils";
 import { useAuth } from "../hooks/useAuth";
+import api from "../services/api";
 
 export function PatientsList() {
   const { user } = useAuth();
+  const [patientsList, setPatientsList] = useState([]);
 
-  const [patientsList, isLoading] = useFetch({
-    url: `${BASE_URL}/professional/${user.id}/patients`,
-    method: "GET",
-    headers: fetchHeaders(),
-  });
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(
+          `${BASE_URL}/professional/${user.id}/patients`,
+          { headers: fetchHeaders() },
+        );
+        setPatientsList(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="p-5">
