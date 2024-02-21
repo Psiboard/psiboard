@@ -8,29 +8,11 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { BASE_URL, fetchHeaders } from "../utils";
-import { useAuth } from "../hooks/useAuth";
-import api from "../services/api";
+import React from "react";
+import { usePatients } from "../hooks/usePatients";
 
 export function PatientsList() {
-  const { user } = useAuth();
-  const [patientsList, setPatientsList] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get(
-          `${BASE_URL}/professional/${user.id}/patients`,
-          { headers: fetchHeaders() },
-        );
-        setPatientsList(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  const { patients } = usePatients();
 
   return (
     <div className="p-5">
@@ -51,7 +33,7 @@ export function PatientsList() {
               </Tr>
             </Thead>
             <Tbody>
-              {patientsList?.map((patient: any) => (
+              {patients?.map((patient: any) => (
                 <Tr>
                   <React.Fragment>
                     <Td>{patient.name}</Td>
