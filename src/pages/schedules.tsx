@@ -56,7 +56,7 @@ export function Schedules() {
   });
 
   // Buscando horarios disponiveis quando a data muda
-  const { data: schedulesData, refetch: refetchSchedules } = useQuery({
+  const { data: schedulesData, } = useQuery({
     queryKey: ["schedules", selectedDay, scheduleDate],
     queryFn: async () => {
       const response = await api.get(
@@ -72,7 +72,6 @@ export function Schedules() {
 
   function handleChangeCalendarDay(date: any) {
     setScheduleDate(formatDate(date));
-    refetchSchedules();
   }
 
   function onSubmit() {
