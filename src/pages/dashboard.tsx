@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DayPicker } from "react-day-picker";
+import { useQuery } from "@tanstack/react-query";
 import { statisticsData } from "../mocks";
 import { useAuth } from "../hooks/useAuth";
 import { formatDate, BASE_URL, fetchHeaders } from "../utils";
@@ -9,34 +10,26 @@ import Card from "../components/card";
 import api from "../services/api";
 
 export function Dashboard() {
-  const [selectedDay, setSelectedDay] = useState<Date>();
   const { user } = useAuth();
+  const [selectedDay, setSelectedDay] = useState<Date>();
   const formatedDate = formatDate(new Date());
   const [scheduleDate, setScheduleDate] = useState<string>(formatedDate);
-  const [schedules, setSchedules] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await api.get(
-          `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
-          { headers: fetchHeaders() },
-        );
-        setSchedules(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [scheduleDate]);
+  const { data, isFetching, refetch } = useQuery({
+    queryKey: ["schedules", scheduleDate, user.id],
+    queryFn: async () => {
+      const response = await api.get(
+        `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
+        { headers: fetchHeaders() },
+      );
+      return response.data;
+    },
+    enabled: !!scheduleDate,
+  });
 
   function handleChangeCalendarDay(date: any) {
     setScheduleDate(formatDate(date));
+    refetch();
   }
 
   return (
@@ -71,12 +64,12 @@ export function Dashboard() {
 
       <div className="mt-10">
         <p className="text-xl text-gray-700">Seus agendamentos do dia</p>
-        {isLoading && <Loading type="spinner" />}
+        {/* {isFetching && <Loading type="spinner" />} */}
         <div className="flex w-full md:h-auto md:flex-row flex-col md:gap-0 gap-10 md:items-start items-center md:mt-0 mt-5">
           <div className="md:w-[50%] w-full flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
-            {schedules && (
+            {data && (
               <React.Fragment>
-                {schedules.map((schedule: any) => (
+                {data?.map((schedule: any) => (
                   <Card
                     scheduleId={schedule.id}
                     hour={schedule.hour}
@@ -89,7 +82,7 @@ export function Dashboard() {
               </React.Fragment>
             )}
 
-            {schedules.length <= 0 && !isLoading && (
+            {data?.length <= 0 && !isFetching && (
               <h3 className="text-primary text-3xl mt-4">
                 Você não tem agendamentos para este dia!
               </h3>

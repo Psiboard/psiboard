@@ -12,7 +12,7 @@ const items = [
 
 export default function SideBar() {
   const { signOut } = useAuth();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const windowSize = useWindowSize();
 
   return (
@@ -128,7 +128,6 @@ export default function SideBar() {
                 />
               </svg>
             </div>
-
             <ul>
               {items.map((item) => (
                 <React.Fragment key={item.name}>

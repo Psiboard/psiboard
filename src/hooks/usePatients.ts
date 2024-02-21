@@ -6,7 +6,7 @@ import { useAuth } from "./useAuth";
 export function usePatients() {
   const { user } = useAuth();
   const { data, refetch, isLoading, isFetching, error } = useQuery({
-    queryKey: ["patients"],
+    queryKey: ["patients-list"],
     queryFn: async () => {
       const response = await api.get(
         `${BASE_URL}/professional/${user.id}/patients`,

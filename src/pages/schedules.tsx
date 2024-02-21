@@ -9,6 +9,7 @@ import { Button } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 export function Schedules() {
   const [selectedDay, setSelectedDay] = useState<Date>();
@@ -38,35 +39,41 @@ export function Schedules() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  function handleChangeCalendarDay(date: any) {
-    setScheduleDate(formatDate(date));
-  }
-
   // Buscando os clientes do Profissional
-  useEffect(() => {
-    api
-      .get(`/professional/${user.id}/patients`, {
+  const {
+    data: patientsData,
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: ["patients", user.id],
+    queryFn: async () => {
+      const response = await api.get(`/professional/${user.id}/patients`, {
         headers: fetchHeaders(),
-      })
-      .then((response) => {
-        setPatients(response.data);
-      })
-      .catch((error) => console.log(error));
-  }, [user.id]);
+      });
+      return response.data;
+    },
+    enabled: !!user.id,
+  });
 
   // Buscando horarios disponiveis quando a data muda
-  useEffect(() => {
-    api
-      .get(`/scheduling/available-schedules?date=${scheduleDate}`, {
-        headers: fetchHeaders(),
-      })
-      .then((response) => {
-        setAvailableSchedules(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [selectedDay, scheduleDate]);
+  const { data: schedulesData, refetch: refetchSchedules } = useQuery({
+    queryKey: ["schedules", selectedDay, scheduleDate],
+    queryFn: async () => {
+      const response = await api.get(
+        `/scheduling/available-schedules?date=${scheduleDate}`,
+        {
+          headers: fetchHeaders(),
+        },
+      );
+      return response.data;
+    },
+    enabled: !!scheduleDate,
+  });
+
+  function handleChangeCalendarDay(date: any) {
+    setScheduleDate(formatDate(date));
+    refetchSchedules();
+  }
 
   function onSubmit() {
     const body = {
@@ -110,9 +117,9 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedPatient(event.target.value)}
               >
-                {patients?.map((patient) => (
-                  <React.Fragment>
-                    <option key={patient} value={patient?.id}>
+                {patientsData?.map((patient: any) => (
+                  <React.Fragment key={patient?.id}>
+                    <option value={patient?.id}>
                       {patient?.name}
                     </option>
                   </React.Fragment>
@@ -126,7 +133,7 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedSchedule(event.target.value)}
               >
-                {availableSchedules.map((schedules) => (
+                {schedulesData?.map((schedules) => (
                   <React.Fragment>
                     <option key={schedules} value={schedules}>
                       {schedules}

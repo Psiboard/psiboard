@@ -19,13 +19,17 @@ export const fetchHeaders = () => {
   return header;
 };
 
+export const sleep = (delay = 1000) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
 
 export const formatDateToInput = (date: any) => {
   const parts = date.split("-");
   const newDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
   return newDate;
-}
-
+};
 
 export const convertDateObjToString = (date: any) => {
   let dia = date.getDate();
@@ -40,4 +44,4 @@ export const convertDateObjToString = (date: any) => {
   }
   // Retorna a data formatada
   return dia + "/" + mes + "/" + ano;
-}
+};
