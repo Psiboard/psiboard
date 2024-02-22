@@ -1,5 +1,5 @@
 import { Select } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import React from "react";
 import { useAuth } from "../hooks/useAuth";
@@ -7,8 +7,6 @@ import { fetchHeaders, formatDate } from "../utils";
 import api from "../services/api";
 import { Button } from "@chakra-ui/react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { isAxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useCreateSchedule } from "../hooks/useCreateSchedule";
 
@@ -20,7 +18,7 @@ export function Schedules() {
   const [selectedSchedule, setSelectedSchedule] = useState("");
   const [selectedPatient, setSelectedPatient] = useState("");
   const { user } = useAuth();
-  const navigate = useNavigate();
+
   const { createSchedule } = useCreateSchedule();
 
   // Buscando os clientes do Profissional
