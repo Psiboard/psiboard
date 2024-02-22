@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { z, ZodError } from "zod";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
-import api from "../services/api";
-import { toast } from "react-toastify";
+import { useCreateProfessional } from "../hooks/useCreateProfessional";
 
 const registerSchema = z.object({
   name: z.string(),
@@ -12,7 +11,7 @@ const registerSchema = z.object({
 });
 
 export function Register() {
-  const navigate = useNavigate();
+  const { createProfessional } = useCreateProfessional();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,21 +27,12 @@ export function Register() {
     }));
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       // Validar os dados do formulário com Zod
-      const validatedData = registerSchema.parse(formData);
-      console.log("Dados válidos:", validatedData);
-      api
-        .post("/professional", validatedData)
-        .then(() => {
-          toast.success("Cadastro realizado com sucesso! Entre na sua conta");
-          navigate("/");
-        })
-        .catch((error) => {
-          toast.error(error);
-        });
+      const body = registerSchema.parse(formData);
+      await createProfessional({ body });
     } catch (error) {
       if (error instanceof ZodError) {
         setFormError(error);

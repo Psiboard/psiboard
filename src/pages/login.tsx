@@ -6,13 +6,13 @@ import { useAuth } from "../hooks/useAuth";
 
 const loginSchema = z.object({
   email: z.string().email("Por favor, insira um endereço de e-mail válido."),
-  password: z.string()
+  password: z.string(),
 });
 
 export function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [formError, setFormError] = useState<ZodError | null>(null);
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -28,7 +28,7 @@ export function Login() {
       // Validar os dados do formulário com Zod
       loginSchema.parse(formData);
       signIn(formData);
-      setFormData({email: "", password: ""});
+      setFormData({ email: "", password: "" });
       setFormError(null);
     } catch (error) {
       if (error instanceof ZodError) {
