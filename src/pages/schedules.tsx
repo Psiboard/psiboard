@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useCreateSchedule } from "../hooks/useCreateSchedule";
 
 export function Schedules() {
   const [selectedDay, setSelectedDay] = useState<Date>();
@@ -18,33 +19,12 @@ export function Schedules() {
   );
   const [selectedSchedule, setSelectedSchedule] = useState("");
   const [selectedPatient, setSelectedPatient] = useState("");
-  const [patients, setPatients] = useState([]);
-  const [availableSchedules, setAvailableSchedules] = useState([
-    "07:00",
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-  ]);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { createSchedule } = useCreateSchedule();
 
   // Buscando os clientes do Profissional
-  const {
-    data: patientsData,
-    isFetching,
-    refetch,
-  } = useQuery({
+  const { data: patientsData } = useQuery({
     queryKey: ["patients", user.id],
     queryFn: async () => {
       const response = await api.get(`/professional/${user.id}/patients`, {
@@ -56,7 +36,7 @@ export function Schedules() {
   });
 
   // Buscando horarios disponiveis quando a data muda
-  const { data: schedulesData, } = useQuery({
+  const { data: schedulesData } = useQuery({
     queryKey: ["schedules", selectedDay, scheduleDate],
     queryFn: async () => {
       const response = await api.get(
@@ -74,7 +54,7 @@ export function Schedules() {
     setScheduleDate(formatDate(date));
   }
 
-  function onSubmit() {
+  async function onSubmit() {
     const body = {
       date: scheduleDate,
       hour: selectedSchedule,
@@ -85,19 +65,12 @@ export function Schedules() {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
       return;
     }
-    console.log(body);
-    api
-      .post("/scheduling", body)
-      .then(() => {
-        toast.success("Agendamento criado com sucesso!");
-        navigate("/dashboard");
-      })
-      .catch((error) => {
-        if (isAxiosError(error)) {
-          toast.error(error.response?.data.message);
-          console.log(error);
-        }
-      });
+    // Requisição com React Query.
+    try {
+      await createSchedule({ body });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -118,9 +91,7 @@ export function Schedules() {
               >
                 {patientsData?.map((patient: any) => (
                   <React.Fragment key={patient?.id}>
-                    <option value={patient?.id}>
-                      {patient?.name}
-                    </option>
+                    <option value={patient?.id}>{patient?.name}</option>
                   </React.Fragment>
                 ))}
               </Select>
@@ -132,7 +103,7 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedSchedule(event.target.value)}
               >
-                {schedulesData?.map((schedules) => (
+                {schedulesData?.map((schedules: any) => (
                   <React.Fragment>
                     <option key={schedules} value={schedules}>
                       {schedules}
