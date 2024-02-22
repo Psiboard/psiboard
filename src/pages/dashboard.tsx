@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { statisticsData } from "../mocks";
 import { useAuth } from "../hooks/useAuth";
 import { formatDate, BASE_URL, fetchHeaders } from "../utils";
-import Loading from "../components/loading";
 import React from "react";
 import Card from "../components/card";
 import api from "../services/api";
