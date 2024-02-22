@@ -63,7 +63,9 @@ export function Dashboard() {
       </div>
 
       <div className="mt-10">
-        <p className="text-xl text-gray-700">Seus agendamentos do dia</p>
+        <p className="text-xl text-gray-700">
+          Seus agendamentos do dia: {scheduleDate}
+        </p>
         {/* {isFetching && <Loading type="spinner" />} */}
         <div className="flex w-full md:h-auto md:flex-row flex-col md:gap-0 gap-10 md:items-start items-center md:mt-0 mt-5">
           <div className="md:w-[50%] w-full flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
