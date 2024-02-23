@@ -22,7 +22,7 @@ describe("Feature Login", () => {
 
     // Preenchendo o campo de email
     const emailInput = screen.getByLabelText("Email");
-    await userEvent.type(emailInput, "teste@teste.com");
+    await userEvent.type(emailInput, "daniel@teste.com");
 
     // Preenchendo o campo de senha
     const passwordInput = screen.getByLabelText("Password");
