@@ -34,19 +34,10 @@ export default function Card({
 
   async function handleDelete(id: string) {
     try {
-      await deleteSchedule(id);
+      await deleteSchedule({id});
     } catch (error) {
       console.log(error);
     }
-    api
-      .delete(`/scheduling/${id}`)
-      .then(() => {
-        toast.success("Agendamento deletado com sucesso!");
-        window.location.reload();
-      })
-      .catch(() => {
-        toast.error("Algo deu errado ao tentar excluir :(");
-      });
   }
 
   return (
