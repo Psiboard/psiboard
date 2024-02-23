@@ -9,10 +9,11 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  AlertDialogCloseButton,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
+
+import { useDeleteSchedule } from "../hooks/useDeleteSchedule";
 
 export default function Card({
   scheduleId,
@@ -22,14 +23,21 @@ export default function Card({
   date,
   phone,
 }: any) {
-  const cancelRef = useRef();
+  const cancelRef = useRef<any>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
+  const { deleteSchedule } = useDeleteSchedule();
+
   function handleClose() {
     setOpen(false);
   }
 
-  function handleDelete(id: string) {
+  async function handleDelete(id: string) {
+    try {
+      await deleteSchedule(id);
+    } catch (error) {
+      console.log(error);
+    }
     api
       .delete(`/scheduling/${id}`)
       .then(() => {

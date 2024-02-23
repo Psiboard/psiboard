@@ -61,18 +61,6 @@ export default function ModalEdit({
     } catch (error) {
       console.log(error);
     }
-    api
-      .patch(`/scheduling/${scheduleId}`, body)
-      .then(() => {
-        toast.success("Agendamento atualizado com sucesso!");
-        window.location.reload();
-      })
-      .catch((error) => {
-        if (isAxiosError(error)) {
-          toast.error(error.response?.data.message);
-          console.log(error);
-        }
-      });
   }
 
   if (isOpen) {
