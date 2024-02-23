@@ -6,6 +6,8 @@ import { isAxiosError } from "axios";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { useAuth } from "../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { useUpdatePatient } from "../hooks/useUpdateSchedule";
 
 export default function ModalEdit({
   isOpen,
@@ -21,23 +23,27 @@ export default function ModalEdit({
   const [selectedHour, setSelectedHour] = useState("");
   const [rescheduling, setRescheduling] = useState("");
   const [scheduleDate, setScheduleDate] = useState<undefined | string>("");
+  const { updatePatient } = useUpdatePatient();
+
+  const {} = useQuery({
+    queryKey: ["available-schedules"],
+    queryFn: async () => {
+      const response = await api.get(
+        `/scheduling/available-schedules?date=${scheduleDate}`,
+      );
+      setAvailableSchedules(response.data);
+      return response.data;
+    },
+    enabled: !!scheduleDate,
+  });
 
   async function handleChangeDate(date: any) {
     let inputDate = formatDateToInput(date);
-    api
-      .get(`/scheduling/available-schedules?date=${inputDate}`)
-      .then((res) => {
-        console.log(res.data);
-        setScheduleDate(inputDate);
-        setAvailableSchedules(res.data);
-      })
-      .catch((err) => {
-        if (isAxiosError(err)) toast.error(err.response?.data.message);
-      });
+    setScheduleDate(inputDate);
   }
 
-  function submitUpdateSchedule() {
-    const data = {
+  async function submitUpdateSchedule() {
+    const body = {
       date: scheduleDate,
       hour: selectedHour,
       type: rescheduling,
@@ -45,12 +51,18 @@ export default function ModalEdit({
       patient: patientId,
       professional: user.id,
     };
-    if (Object.values(data).some((value) => value === "")) {
+    if (Object.values(body).some((value) => value === "")) {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
       return;
     }
+
+    try {
+      await updatePatient({ body, scheduleId });
+    } catch (error) {
+      console.log(error);
+    }
     api
-      .patch(`/scheduling/${scheduleId}`, data)
+      .patch(`/scheduling/${scheduleId}`, body)
       .then(() => {
         toast.success("Agendamento atualizado com sucesso!");
         window.location.reload();
