@@ -2,7 +2,6 @@
 import { Button, Select } from "@chakra-ui/react";
 import { useState } from "react";
 import { formatDateToInput } from "../utils";
-import { isAxiosError } from "axios";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { useAuth } from "../hooks/useAuth";

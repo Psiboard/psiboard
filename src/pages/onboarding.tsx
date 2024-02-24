@@ -3,11 +3,14 @@ import onboarding from "../assets/onboarding.png";
 import About from "../components/about-us";
 import custome from "../assets/custome.png";
 import React from "react";
+import Loading from "../components/loading";
+
 export function Onboarding() {
   return (
     <React.Fragment>
       <nav className="sm:flex flex sm:flex-row flex-col justify-between items-center py-4 px-8 sm:mb-0 mb-10 text-white">
         <div className="flex items-center">
+          <Loading type="spinner" />
           <img
             src={custome}
             alt="Logo"

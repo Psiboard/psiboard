@@ -1,7 +1,5 @@
 import React, { useRef, useState } from "react";
 import ModalEdit from "./modal-edit";
-import api from "../services/api";
-import { toast } from "react-toastify";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -33,8 +31,9 @@ export default function Card({
   }
 
   async function handleDelete(id: string) {
+     console.log("Delete schedule called with id:", id);
     try {
-      await deleteSchedule({id});
+      await deleteSchedule({ id });
     } catch (error) {
       console.log(error);
     }
@@ -46,14 +45,23 @@ export default function Card({
         key={scheduleId}
         className="h-auto md:gap-0 gap-5 flex md:flex-row flex-col items-center bg-gray-100 rounded-[8px] w-[100%] mb-3 mt-1 "
       >
-        <span className="bg-[#02969c] sm:h-[120px] h-[80px] md:w-auto w-full text-[#fff] flex items-center md:mr-4 p-[0.8rem] md:rounded-[8px_0_0_8px] rounded-md">
+        <span
+          data-testid="hour"
+          className="bg-[#02969c] sm:h-[120px] h-[80px] md:w-auto w-full text-[#fff] flex items-center md:mr-4 p-[0.8rem] md:rounded-[8px_0_0_8px] rounded-md"
+        >
           {hour}h
         </span>
         <div className="flex md:flex-row flex-col justify-between md:items-center w-full md:p-0 px-2">
           <div className="flex flex-col gap-1 py-2">
-            <p className="text-gray-700 text-[1.2rem]">{name}</p>
-            <p className="text-gray-700 text-[1.2rem]">{date}</p>
-            <p className="text-gray-700 text-[1.2rem]">Telefone: {phone}</p>
+            <p data-testid="name" className="text-gray-700 text-[1.2rem]">
+              {name}
+            </p>
+            <p data-testid="date" className="text-gray-700 text-[1.2rem]">
+              {date}
+            </p>
+            <p data-testid="phone" className="text-gray-700 text-[1.2rem]">
+              Telefone: {phone}
+            </p>
           </div>
           <div className="flex md:flex-col md:mr-5 gap-5 md:py-0 py-3 md:justify-center justify-around">
             <span className="cursor-pointer" onClick={() => setOpen(true)}>
@@ -74,6 +82,7 @@ export default function Card({
             </span>
             <span
               className="cursor-pointer"
+              data-testid="delete-icon"
               // onClick={() => handleDelete(scheduleId)}
               onClick={onOpen}
             >
@@ -113,7 +122,11 @@ export default function Card({
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            <AlertDialogHeader
+              fontSize="lg"
+              fontWeight="bold"
+              data-testid="delete-header"
+            >
               Deletar agendamento
             </AlertDialogHeader>
 
