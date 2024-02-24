@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { expect, describe, it, vi, beforeEach, afterEach } from "vitest";
+import { expect, describe, it, vi } from "vitest";
 import Card from "../../components/card";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

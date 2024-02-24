@@ -137,10 +137,20 @@ export default function ModalEdit({
             </div>
           </div>
           <div className=" flex justify-between pt-0 pb-8 px-8">
-            <Button colorScheme="red" size="sm" onClick={onClose}>
+            <Button
+              colorScheme="red"
+              size="sm"
+              onClick={onClose}
+              data-testid="cancel"
+            >
               Cancelar
             </Button>
-            <Button colorScheme="teal" size="sm" onClick={submitUpdateSchedule}>
+            <Button
+              colorScheme="teal"
+              size="sm"
+              onClick={submitUpdateSchedule}
+              data-testid="edit"
+            >
               Editar
             </Button>
           </div>
