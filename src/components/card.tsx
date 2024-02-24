@@ -31,7 +31,6 @@ export default function Card({
   }
 
   async function handleDelete(id: string) {
-     console.log("Delete schedule called with id:", id);
     try {
       await deleteSchedule({ id });
     } catch (error) {

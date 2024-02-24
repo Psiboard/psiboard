@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { expect, describe, it, vi } from "vitest";
+import { expect, describe, it, vi, beforeEach, afterEach } from "vitest";
 import Card from "../../components/card";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -10,7 +10,6 @@ vi.mock("../../../hooks/useDeleteSchedule", () => ({
     deleteSchedule: deleteScheduleMock,
   }),
 }));
-
 
 describe("Card Component", () => {
   it("renders card with correct information", () => {
@@ -86,8 +85,8 @@ describe("Card Component", () => {
     fireEvent.click(confirmDeleteButton);
 
     // Aguarda a função de exclusão ser chamada
-    await waitFor(() => {
-      expect(deleteScheduleMock).toHaveBeenCalledWith(id);
+    waitFor(() => {
+      expect(deleteScheduleMock).toHaveBeenCalledWith({ id });
     });
   });
 });
