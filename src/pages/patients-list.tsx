@@ -20,7 +20,7 @@ export function PatientsList() {
         Sua lista de pacientes
       </h1>
       <div>
-        <TableContainer className="custom-scrollbar">
+        <TableContainer className="custom-scrollbar" data-testid="patients-table">
           <Table variant="simple">
             <Thead>
               <Tr>

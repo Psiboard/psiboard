@@ -16,7 +16,7 @@ export function useCreatePatient() {
       navigate("/dashboard");
     },
     onError(error) {
-      console.log("Caiu no onError do useCreateSchedule", error);
+      console.log("Caiu no onError do useCreatePatient", error);
       if (isAxiosError(error)) {
         toast.error(error.response?.data.message);
         console.log(error);

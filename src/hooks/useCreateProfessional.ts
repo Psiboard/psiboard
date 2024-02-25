@@ -6,8 +6,9 @@ import { isAxiosError } from "axios";
 
 export function useCreateProfessional() {
   const navigate = useNavigate();
-  const {mutateAsync} = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async ({ body }: any): Promise<any> => {
+      console.log("Body recebido no mutationFn():", body);
       const response = await api.post("/professional", body);
       return response.data;
     },
@@ -16,16 +17,15 @@ export function useCreateProfessional() {
       navigate("/");
     },
     onError(error) {
-      console.log("Caiu no onError do useCreateSchedule", error);
+      console.log("Caiu no onError do useCreateProfessional");
       if (isAxiosError(error)) {
         toast.error(error.response?.data.message);
-        console.log(error);
+        console.log(error.response?.data);
       }
     },
   });
 
-   return {
-     createProfessional: mutateAsync,
-   };
-
+  return {
+    createProfessional: mutateAsync,
+  };
 }

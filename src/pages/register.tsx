@@ -35,6 +35,7 @@ export function Register() {
       setIsLoading(true);
       // Validar os dados do formulário com Zod
       const body = registerSchema.parse(formData);
+      console.log("Body enviado: ", body)
       await createProfessional({ body });
     } catch (error) {
       if (error instanceof ZodError) {
@@ -82,6 +83,7 @@ export function Register() {
                   id="name"
                   name="name"
                   type="text"
+                  data-testid="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   autoComplete="nome"
@@ -104,6 +106,7 @@ export function Register() {
                   id="email"
                   name="email"
                   type="email"
+                  data-testid="email"
                   value={formData.email}
                   onChange={handleInputChange}
                   autoComplete="email"
@@ -128,6 +131,7 @@ export function Register() {
                   id="password"
                   name="password"
                   type="password"
+                  data-testid="password"
                   value={formData.password}
                   onChange={handleInputChange}
                   autoComplete="current-password"

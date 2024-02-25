@@ -17,10 +17,16 @@ export function Onboarding() {
         </div>
 
         <div className="sm:flex items-center space-x-4">
-          <button className="px-4 py-1 bg-[#02969c] text-[#fff] font-semibold rounded">
+          <button
+            className="px-4 py-1 bg-[#02969c] text-[#fff] font-semibold rounded"
+            data-testid="button-onboarding"
+          >
             <Link to="/login">Fazer Login</Link>
           </button>
-          <button className="px-4 py-1 bg-[#02969c] text-[#fff] font-semibold rounded">
+          <button
+            className="px-4 py-1 bg-[#02969c] text-[#fff] font-semibold rounded"
+            data-testid="button-onboarding"
+          >
             <Link to="/register">Cadastre-se</Link>
           </button>
         </div>
@@ -44,7 +50,7 @@ export function Onboarding() {
         <div className="w-[50%] justify-end bg-cover bg-center flex">
           <img
             src={onboarding}
-            alt="Imagem"
+            alt="onboardingImage"
             className="sm:flex hidden h-[500px] w-auto object-contain justify-end"
           />
         </div>
