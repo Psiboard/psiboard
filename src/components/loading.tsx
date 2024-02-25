@@ -15,7 +15,7 @@ export default function Loading({ type }: TypeProps) {
       ) : (
         <p
           data-testid="request"
-          className="text-lg px-2 py-1 bg-white rounded-full w-1/2 mx-auto mb-4 text-center animate-fade-in"
+          className="text-lg py-2 bg-[#02969c] rounded-full w-[25%] mx-auto mb-5 text-center text-[#fff] animate-fade-in"
         >
           Aguarde um pouco...
         </p>

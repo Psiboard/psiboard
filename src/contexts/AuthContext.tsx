@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { sleep } from "../utils";
 
 interface IAuthProvider {
   children: ReactNode;
@@ -58,6 +59,7 @@ export function AuthProvider({ children }: IAuthProvider) {
 
   async function signIn({ email, password }: ISignIn) {
     try {
+      await sleep();
       const { data } = await api.post(`/auth/login`, {
         email: email,
         password: password,

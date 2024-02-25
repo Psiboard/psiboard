@@ -3,6 +3,7 @@ import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 import { useCreateProfessional } from "../hooks/useCreateProfessional";
+import Loading from "../components/loading";
 
 const registerSchema = z.object({
   name: z.string(),
@@ -12,6 +13,7 @@ const registerSchema = z.object({
 
 export function Register() {
   const { createProfessional } = useCreateProfessional();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,6 +32,7 @@ export function Register() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
+      setIsLoading(true);
       // Validar os dados do formulário com Zod
       const body = registerSchema.parse(formData);
       await createProfessional({ body });
@@ -42,6 +45,7 @@ export function Register() {
   return (
     <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        {isLoading && <Loading type="request" />}
         <div className=" flex flex-col items-center">
           <img
             src={custome}

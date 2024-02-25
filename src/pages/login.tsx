@@ -3,6 +3,7 @@ import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 import { useAuth } from "../hooks/useAuth";
+import Loading from "../components/loading";
 
 const loginSchema = z.object({
   email: z.string().email("Por favor, insira um endereço de e-mail válido."),
@@ -12,6 +13,7 @@ const loginSchema = z.object({
 export function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [formError, setFormError] = useState<ZodError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -25,6 +27,7 @@ export function Login() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
+      setIsLoading(true);
       // Validar os dados do formulário com Zod
       loginSchema.parse(formData);
       signIn(formData);
@@ -40,6 +43,7 @@ export function Login() {
   return (
     <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center">
+      {isLoading && <Loading type="request"/>}
         <div>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
             <img
