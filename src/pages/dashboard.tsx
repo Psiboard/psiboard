@@ -32,7 +32,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="px-5">
+    <div className="px-5 mb-5">
       <div>
         <h1 className="text-3xl font-bold text-gray-700 mb-10 mt-5 lg:text-start text-center">
           Bem vindo, {user.nome}

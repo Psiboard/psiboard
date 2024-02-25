@@ -32,9 +32,8 @@ export function Onboarding() {
               PsiBoard, é praticidade
             </h2>
             <p className="mt-6 text-lg leading-8">
-              Centralize os atendimentos do seu consultório em um só lugar e
-              tenha o controle da sua logistica com acesso fácil, simples e
-              objetivo.
+              Centralize os atendimentos do consultório em um só lugar e tenha o
+              controle com acesso fácil, simples e objetivo.
             </p>
           </div>
           <button className="px-4 py-2 mt-4 bg-[#02969c] text-[#fff] font-semibold rounded">
