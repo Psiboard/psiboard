@@ -131,7 +131,7 @@ export default function SideBar() {
                 />
               </svg>
             </div>
-            <ul>
+            <ul data-testid="menu-items">
               {items.map((item) => (
                 <React.Fragment key={item.name}>
                   <Link to={item.link}>
