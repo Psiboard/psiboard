@@ -25,7 +25,7 @@ export function Dashboard() {
     },
     enabled: !!scheduleDate,
   });
-
+  console.log("Schedules:", data)
   function handleChangeCalendarDay(date: any) {
     setScheduleDate(formatDate(date));
     refetch();
@@ -70,7 +70,7 @@ export function Dashboard() {
           <div className="md:w-[50%] w-full flex flex-col custom-scrollbar items-start max-h-[80%] overflow-y-auto scroll-smooth pl-1 pr-2 pt-2 pb-0">
             {data && (
               <React.Fragment>
-                {data?.map((schedule: any) => (
+                {data?.map((schedule: Schedule) => (
                   <Card
                     scheduleId={schedule.id}
                     hour={schedule.hour}
