@@ -1,0 +1,28 @@
+name: Pipelin Psiboard-Frontend
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  ci_web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Typechecking
+        run: npm run typecheck
+      - name: Linting Application
+        run: npm run lint
+      - name: Running Tests
+        run: "npm run test"
+
