@@ -17,6 +17,7 @@ describe("Modal Edit Component", () => {
           patientId="1"
           name="Nome do Paciente"
           date="2024-02-24"
+          phone="99 9999-9999"
         />
       </QueryClientProvider>,
     );
@@ -35,6 +36,7 @@ describe("Modal Edit Component", () => {
           patientId="1"
           name="Nome do Paciente"
           date="2024-02-24"
+          phone="99 9999-9999"
         />
       </QueryClientProvider>,
     );
@@ -54,6 +56,7 @@ describe("Modal Edit Component", () => {
           patientId="1"
           name="Nome do Paciente"
           date="2024-02-24"
+          phone="99 9999-9999"
         />
       </QueryClientProvider>,
     );
