@@ -25,7 +25,7 @@ export function Dashboard() {
     },
     enabled: !!scheduleDate,
   });
-  console.log("Schedules:", data)
+
   function handleChangeCalendarDay(date: any) {
     setScheduleDate(formatDate(date));
     refetch();

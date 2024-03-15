@@ -33,8 +33,8 @@ export function PatientsList() {
               </Tr>
             </Thead>
             <Tbody>
-              {patients?.map((patient: any) => (
-                <Tr>
+              {patients?.map((patient: Patients) => (
+                <Tr key={patient.id}>
                   <React.Fragment>
                     <Td>{patient.name}</Td>
                     <Td>{patient.age}</Td>

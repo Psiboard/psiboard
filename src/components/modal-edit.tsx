@@ -16,7 +16,7 @@ export default function ModalEdit({
   patientId,
   name,
   date,
-}: any) {
+}: ModalProps) {
   const { user } = useAuth();
   const [availableSchedules, setAvailableSchedules] = useState([]);
   const [selectedHour, setSelectedHour] = useState("");

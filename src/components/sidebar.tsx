@@ -14,7 +14,6 @@ export default function SideBar() {
   const { signOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const windowSize = useWindowSize();
-  console.log("Window width:", windowSize.width);
 
   return (
     <React.Fragment>

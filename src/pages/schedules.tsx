@@ -87,7 +87,7 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedPatient(event.target.value)}
               >
-                {patientsData?.map((patient: any) => (
+                {patientsData?.map((patient: Patients) => (
                   <React.Fragment key={patient?.id}>
                     <option value={patient?.id}>{patient?.name}</option>
                   </React.Fragment>
@@ -101,11 +101,9 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedSchedule(event.target.value)}
               >
-                {schedulesData?.map((schedules: any) => (
-                  <React.Fragment>
-                    <option key={schedules} value={schedules}>
-                      {schedules}
-                    </option>
+                {schedulesData?.map((schedules: string) => (
+                  <React.Fragment key={schedules}>
+                    <option value={schedules}>{schedules}</option>
                   </React.Fragment>
                 ))}
               </Select>

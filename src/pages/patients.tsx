@@ -3,11 +3,12 @@ import { useAuth } from "../hooks/useAuth";
 import { useCreatePatient } from "../hooks/useCreatePatients";
 
 export function Patients() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<Patients>();
   const { user } = useAuth();
   const { createPatient } = useCreatePatient();
 
-  async function onSubmit(formData: any) {
+  async function onSubmit(formData: Patients) {
+    console.log(formData);
     const id = user.id;
     const body = { ...formData, professional: id };
     try {

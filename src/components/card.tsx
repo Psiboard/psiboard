@@ -20,7 +20,7 @@ export default function Card({
   name,
   date,
   phone,
-}: any) {
+}: CardProps) {
   const cancelRef = useRef<any>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
