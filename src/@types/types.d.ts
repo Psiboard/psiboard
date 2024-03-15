@@ -35,7 +35,6 @@ type ModalProps = {
   onClose: () => void;
 };
 
-
 type Patients = {
   adress: string;
   age: number | string;

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 
 export function useCreateSchedule() {
-
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
     mutationFn: async ({ body }: any): Promise<any> => {

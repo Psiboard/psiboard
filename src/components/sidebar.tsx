@@ -18,7 +18,10 @@ export default function SideBar() {
   return (
     <React.Fragment>
       {!isOpen && windowSize.width < 1024 && (
-        <button className="absolute top-6 left-6" data-testid="button-mobile-menu">
+        <button
+          className="absolute top-6 left-6"
+          data-testid="button-mobile-menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

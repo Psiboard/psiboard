@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-#root{
-  @apply font-poppins
+#root {
+  @apply font-poppins;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-   @apply bg-[#dddfeb] rounded-lg;
+  @apply bg-[#dddfeb] rounded-lg;
 }
 
 .custom-scrollbar::-webkit-scrollbar {

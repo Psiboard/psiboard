@@ -18,7 +18,7 @@ interface ISignIn {
   password: string;
 }
 interface IAuthContextData {
-  signIn: ({email, password}: ISignIn) => void;
+  signIn: ({ email, password }: ISignIn) => void;
   signOut: () => void;
   user: IUserData;
   availableSchedules: Array<string>;
@@ -45,13 +45,13 @@ export function AuthProvider({ children }: IAuthProvider) {
     "20:00",
     "21:00",
   ];
- const [user, setUser] = useState(() => {
-   const user = Cookies.get("user@data");
-   if (user) {
-     return JSON.parse(user);
-   }
-   return {};
- });
+  const [user, setUser] = useState(() => {
+    const user = Cookies.get("user@data");
+    if (user) {
+      return JSON.parse(user);
+    }
+    return {};
+  });
 
   // Variavel de controle de usuário logado
   const isAuthenticated = !!user && Object.keys(user).length !== 0;
@@ -70,7 +70,7 @@ export function AuthProvider({ children }: IAuthProvider) {
         id: data.id,
       };
       Cookies.set("user@data", JSON.stringify(userData), { expires: 1 / 24 });
-      Cookies.set("token@data", data.access_token, { expires:  1 /  24 });
+      Cookies.set("token@data", data.access_token, { expires: 1 / 24 });
       navigate("/dashboard");
       toast.success(`Seja bem vindo(a), ${userData.nome}`);
       setUser(userData);
@@ -79,24 +79,23 @@ export function AuthProvider({ children }: IAuthProvider) {
       toast.error("Não conseguimos realizar o login. Tente mais tarde");
     }
   }
-   function signOut() {
-     Cookies.remove("user@data");
-     Cookies.remove("token@data");
-     navigate("/");
-   }
+  function signOut() {
+    Cookies.remove("user@data");
+    Cookies.remove("token@data");
+    navigate("/");
+  }
 
-    return (
-      <AuthContext.Provider
-        value={{
-          signIn,
-          signOut,
-          user,
-          availableSchedules,
-          isAuthenticated,
-        }}
-      >
-        {children}
-      </AuthContext.Provider>
-    );
-
+  return (
+    <AuthContext.Provider
+      value={{
+        signIn,
+        signOut,
+        user,
+        availableSchedules,
+        isAuthenticated,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }

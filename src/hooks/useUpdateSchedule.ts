@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
 
 export function useUpdatePatient() {
-  const {mutateAsync} = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async ({ body, scheduleId }: any): Promise<any> => {
       const response = await api.patch(`/scheduling/${scheduleId}`, body);
       return response.data;
@@ -22,8 +22,7 @@ export function useUpdatePatient() {
     },
   });
 
-   return {
-     updatePatient: mutateAsync,
-   };
-
+  return {
+    updatePatient: mutateAsync,
+  };
 }

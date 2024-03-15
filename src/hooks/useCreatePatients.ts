@@ -6,7 +6,7 @@ import { isAxiosError } from "axios";
 
 export function useCreatePatient() {
   const navigate = useNavigate();
-  const {mutateAsync} = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async ({ body }: any): Promise<any> => {
       const response = await api.post("/patient", body);
       return response.data;
@@ -24,8 +24,7 @@ export function useCreatePatient() {
     },
   });
 
-   return {
-     createPatient: mutateAsync,
-   };
-
+  return {
+    createPatient: mutateAsync,
+  };
 }

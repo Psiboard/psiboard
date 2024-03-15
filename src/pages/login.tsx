@@ -43,7 +43,7 @@ export function Login() {
   return (
     <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center">
-      {isLoading && <Loading type="request"/>}
+        {isLoading && <Loading type="request" />}
         <div>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
             <img
