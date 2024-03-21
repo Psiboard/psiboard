@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const formatDate = (date: any) => {
   const dia = String(date.getDate()).padStart(2, "0");
