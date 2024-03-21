@@ -79,7 +79,7 @@ export function Schedules() {
 
       <div>
         <div className="flex md:flex-row flex-col-reverse w-full justify-between">
-          <div className="w-[50%] flex flex-col md:gap-5 gap-10 py-5 md:px-3 rounded-sm">
+          <div className="sm:w-[50%] w-[75%] flex flex-col md:gap-5 gap-10 py-5 md:px-3 rounded-sm">
             <div>
               <label>Paciente</label>
               <Select
@@ -113,7 +113,7 @@ export function Schedules() {
             </Button>
           </div>
 
-          <div className="pr-10">
+          <div className="sm:pr-10">
             <p className="text-xl mb-2 font-semibold">
               Selecione a data do agendamento
             </p>
