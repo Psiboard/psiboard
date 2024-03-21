@@ -47,14 +47,14 @@ export function Dashboard() {
                 dangerouslySetInnerHTML={{ __html: item.icon }}
                 className="h-8"
               ></div>
-
+              <span className="text-[12px]">*Em breve...</span>
               <div className="flex justify-start items-center gap-1">
                 <span className="text-2xl font-bold text-black dark:text-white">
                   {item.number}
                 </span>
-                <h5 className="text-xl font-medium text-gray-700 ">
+                <span className="text-xl font-medium text-gray-700 ">
                   {item.label}
-                </h5>
+                </span>
               </div>
             </div>
           </React.Fragment>

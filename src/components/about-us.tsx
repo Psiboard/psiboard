@@ -27,11 +27,12 @@ export default function About() {
           </h2>
           <p className="mt-6 text-lg leading-8 text-[#000] font-normal">
             Nossa missão é centralizar e unificar o controle de atendimentos
-            para pequenos e médios consultórios, tendo em vista atender a
-            demanda de sublocações de salas.
+            para pequenos consultórios, tendo em vista atender a demanda de
+            sublocações de salas.
           </p>
         </div>
-        <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+        <p className="mt-5 text-slate-500">*Dados ilustrativos, em breve os dados reais...</p>
+        <div className="mx-auto mt-1 max-w-2xl lg:mx-0 lg:max-w-none">
           <dl className="flex flex-col gap-3 lg:flex-row lg:justify-between justify-start">
             {stats.map((stat) => (
               <div key={stat.name} className="flex flex-col-reverse">
