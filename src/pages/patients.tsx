@@ -35,7 +35,7 @@ export function Patients() {
             Informações pessoais
           </h2>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="mt-10 sm:grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
                 htmlFor="first-name"
@@ -180,13 +180,13 @@ export function Patients() {
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
-            className="rounded-md bg-red-600 px-3 py-2 lg:w-[15%] text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-red-600 px-3 py-2 lg:w-[15%] w-[25%] text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Cancelar
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[#02969c] px-3 py-2 w-[15%] text-sm font-semibold text-white shadow-sm hover:bg-[#44babe] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-[#02969c] px-3 py-2 lg:w-[15%] w-[25%] text-sm font-semibold text-white shadow-sm hover:bg-[#44babe] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Salvar
           </button>
