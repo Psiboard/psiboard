@@ -1,4 +1,4 @@
-name: Pipelin Psiboard-Frontend
+name: Pipeline Psiboard-Frontend
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: ['main']
 
 jobs:
-  ci_web:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
