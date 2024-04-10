@@ -147,6 +147,7 @@ export default function SideBar() {
           </div>
           <div>
             <button
+              data-testid="button-logout"
               onClick={signOut}
               className="px-4 py-2 w-[120px] bg-[#22c3c8] text-gray-100 font-semibold rounded flex justify-center gap-1"
             >
@@ -164,7 +165,7 @@ export default function SideBar() {
                   d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
                 />
               </svg>
-              <span data-testid="button-logout">Sair</span>
+              <span>Sair</span>
             </button>
           </div>
         </div>
