@@ -20,7 +20,6 @@ export function Register() {
     password: "",
   });
   const [formError, setFormError] = useState<ZodError | null>(null);
-  const [errors, setErrors] = useState({});
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -28,23 +27,6 @@ export function Register() {
       ...prevData,
       [name]: value,
     }));
-
-    try {
-      registerSchema.parse(formData);
-      setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-    } catch (error) {
-      if (error instanceof ZodError) {
-        const fieldError = error.errors.find((err) => err.path[0] === name);
-        if (fieldError) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: fieldError.message,
-          }));
-        } else {
-          setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-        }
-      }
-    }
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -159,9 +141,7 @@ export function Register() {
                   required
                   className="block w-full  h-[40px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {errors.password && (
-                  <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-                )}
+
               </div>
             </div>
 
