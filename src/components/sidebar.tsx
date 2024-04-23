@@ -84,6 +84,7 @@ export default function SideBar() {
             <button
               onClick={signOut}
               className="px-4 py-2 w-[120px] bg-[#22c3c8] text-gray-100 font-semibold rounded flex justify-center gap-1"
+              data-testid="button-logout"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,9 +148,9 @@ export default function SideBar() {
           </div>
           <div>
             <button
-              data-testid="button-logout"
               onClick={signOut}
               className="px-4 py-2 w-[120px] bg-[#22c3c8] text-gray-100 font-semibold rounded flex justify-center gap-1"
+              data-testid="button-logout"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
