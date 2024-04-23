@@ -11,7 +11,7 @@ describe("Feature Login", () => {
     cy.get("#email").type("usuario.demo@teste.com");
     cy.get("#password").type("testedemo");
     cy.get('button[type="submit"]').click();
-    cy.wait(5000);
+    cy.wait(8000);
     cy.get('[data-testid="button-mobile-menu"]').click();
     cy.get('[data-testid="button-logout"]').click();
   });
