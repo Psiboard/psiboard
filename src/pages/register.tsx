@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 import { useCreateProfessional } from "../hooks/useCreateProfessional";
 import Loading from "../components/loading";
+import { useAuth } from "../hooks/useAuth";
 
 const registerSchema = z.object({
   name: z.string(),
@@ -13,7 +14,7 @@ const registerSchema = z.object({
 
 export function Register() {
   const { createProfessional } = useCreateProfessional();
-  const [isLoading, setIsLoading] = useState(false);
+  const { loading } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,12 +33,10 @@ export function Register() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      setIsLoading(true);
       // Validar os dados do formulário com Zod
       const body = registerSchema.parse(formData);
       await createProfessional({ body });
     } catch (error) {
-      setIsLoading(false);
       if (error instanceof ZodError) {
         setFormError(error);
       }
@@ -46,7 +45,7 @@ export function Register() {
   return (
     <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        {isLoading && <Loading type="request" />}
+        {loading && <Loading type="request" />}
         <div className=" flex flex-col items-center">
           <img
             src={custome}
@@ -141,7 +140,6 @@ export function Register() {
                   required
                   className="block w-full  h-[40px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-
               </div>
             </div>
 
