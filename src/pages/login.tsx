@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { z, ZodError } from "zod";
+import React, { useEffect, useState } from "react";
+import { z } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 import { useAuth } from "../hooks/useAuth";
@@ -12,9 +12,7 @@ const loginSchema = z.object({
 
 export function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [formError, setFormError] = useState<ZodError | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, loading } = useAuth();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -26,24 +24,21 @@ export function Login() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     try {
-      setIsLoading(true);
       // Validar os dados do formulário com Zod
       loginSchema.parse(formData);
       signIn(formData);
       setFormData({ email: "", password: "" });
-      setFormError(null);
     } catch (error) {
-      if (error instanceof ZodError) {
-        setFormError(error);
-      }
+      console.log(error);
     }
   }
 
   return (
     <React.Fragment>
       <div className="flex min-h-[100vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center">
-        {isLoading && <Loading type="request" />}
+        {loading && <Loading type="request" />}
         <div>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
             <img
@@ -55,16 +50,6 @@ export function Login() {
               Faça login na sua conta
             </h1>
           </div>
-          {formError?.errors.map((error, index) => (
-            <div className="flex justify-center">
-              <span
-                key={index}
-                className="text-red-500 font-medium rounded-md mt-4"
-              >
-                {error.message}
-              </span>
-            </div>
-          ))}
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" onSubmit={handleSubmit}>

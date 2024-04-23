@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { sleep } from "../utils";
 
 interface IAuthProvider {
   children: ReactNode;
@@ -21,30 +20,13 @@ interface IAuthContextData {
   signIn: ({ email, password }: ISignIn) => void;
   signOut: () => void;
   user: IUserData;
-  availableSchedules: Array<string>;
   isAuthenticated: boolean;
+  loading: boolean;
 }
 
 export const AuthContext = createContext({} as IAuthContextData);
 
 export function AuthProvider({ children }: IAuthProvider) {
-  const availableSchedules = [
-    "07:00",
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-  ];
   const [user, setUser] = useState(() => {
     const user = Cookies.get("user@data");
     if (user) {
@@ -52,6 +34,7 @@ export function AuthProvider({ children }: IAuthProvider) {
     }
     return {};
   });
+  const [loading, setLoading] = useState(false);
 
   // Variavel de controle de usuário logado
   const isAuthenticated = !!user && Object.keys(user).length !== 0;
@@ -59,7 +42,7 @@ export function AuthProvider({ children }: IAuthProvider) {
 
   async function signIn({ email, password }: ISignIn) {
     try {
-      await sleep();
+      setLoading(true);
       const { data } = await api.post(`/auth/login`, {
         email: email,
         password: password,
@@ -74,8 +57,9 @@ export function AuthProvider({ children }: IAuthProvider) {
       navigate("/dashboard");
       toast.success(`Seja bem vindo(a), ${userData.nome}`);
       setUser(userData);
-      return data;
+      setLoading(false);
     } catch {
+      setLoading(false);
       toast.error("Não conseguimos realizar o login. Tente mais tarde");
     }
   }
@@ -91,8 +75,8 @@ export function AuthProvider({ children }: IAuthProvider) {
         signIn,
         signOut,
         user,
-        availableSchedules,
         isAuthenticated,
+        loading
       }}
     >
       {children}
