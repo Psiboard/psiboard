@@ -8,9 +8,8 @@ export function Patients() {
   const { createPatient } = useCreatePatient();
 
   async function onSubmit(formData: Patients) {
-    console.log(formData);
-    const id = user.id;
-    const body = { ...formData, professional: id };
+    formData.age = Number(formData.age);
+    const body = { ...formData, professional: user.id };
     try {
       await createPatient({ body });
     } catch (error) {
