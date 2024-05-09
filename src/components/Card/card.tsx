@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import ModalEdit from "./modal-edit";
+import ModalEdit from "../ModalEdit/modal-edit";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -11,7 +11,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import { useDeleteSchedule } from "../hooks/useDeleteSchedule";
+import { useDeleteSchedule } from "../../hooks/useDeleteSchedule";
 
 export default function Card({
   scheduleId,

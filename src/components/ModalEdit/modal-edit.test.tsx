@@ -1,5 +1,5 @@
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import ModalEdit from "../../components/modal-edit";
+import ModalEdit from "./modal-edit";
 import { expect, describe, it, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

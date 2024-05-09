@@ -3,7 +3,7 @@ import { z, ZodError } from "zod";
 import { Link } from "react-router-dom";
 import custome from "../assets/custome.png";
 import { useCreateProfessional } from "../hooks/useCreateProfessional";
-import Loading from "../components/loading";
+import Loading from "../components/Loading/loading";
 import { useAuth } from "../hooks/useAuth";
 
 const registerSchema = z.object({

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, describe, it } from "vitest";
-import Loading from "../../components/loading";
+import Loading from "./loading";
 
 describe("Loading Component", () => {
   it("renders spinner when type is 'spinner'", () => {
