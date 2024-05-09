@@ -3,7 +3,7 @@ import { expect, describe, it } from "vitest";
 import { Patients } from "../../pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "../../contexts/AuthContext";
+import { AuthProvider } from "../../context/AuthContext";
 
 describe("Patients component", () => {
   it("should be render Patients component", () => {
