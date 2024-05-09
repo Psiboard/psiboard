@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import custome from "../assets/custome.png";
-import { useAuth } from "../hooks/useAuth";
+import custome from "../../assets/custome.png";
+import { useAuth } from "../../hooks/useAuth";
 import React, { useState } from "react";
-import useWindowSize from "../hooks/useWindowSize";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const items = [
   { name: "Cadastrar pacientes", link: "/dashboard/patients" },

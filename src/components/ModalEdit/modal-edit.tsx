@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Select } from "@chakra-ui/react";
 import { useState } from "react";
-import { formatDateToInput } from "../utils";
-import api from "../services/api";
+import { formatDateToInput } from "../../utils";
+import api from "../../services/api";
 import { toast } from "react-toastify";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import { useUpdatePatient } from "../hooks/useUpdateSchedule";
+import { useUpdatePatient } from "../../hooks/useUpdateSchedule";
 
 export default function ModalEdit({
   isOpen,

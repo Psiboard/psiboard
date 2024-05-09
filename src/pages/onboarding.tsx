@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import onboarding from "../assets/onboarding.png";
-import About from "../components/about-us";
+import About from "../components/AboutUs/about-us";
 import custome from "../assets/custome.png";
 import React from "react";
 

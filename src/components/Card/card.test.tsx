@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { expect, describe, it, vi } from "vitest";
-import Card from "../../components/card";
+import Card from "./card";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Mock do hook de exclusão

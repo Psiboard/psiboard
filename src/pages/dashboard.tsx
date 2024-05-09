@@ -5,7 +5,7 @@ import { statisticsData } from "../mocks";
 import { useAuth } from "../hooks/useAuth";
 import { formatDate, BASE_URL, fetchHeaders } from "../utils";
 import React from "react";
-import Card from "../components/card";
+import Card from "../components/Card/card";
 import api from "../services/api";
 
 export function Dashboard() {
