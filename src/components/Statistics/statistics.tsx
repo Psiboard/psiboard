@@ -1,14 +1,25 @@
 import React from "react";
 import { usePatients } from "../../hooks/usePatients";
-import { useAvailableSchedule } from "../../hooks/useAvailableSchedule";
+import { useQuery } from "@tanstack/react-query";
+import api from "../../services/api";
 
 interface Props {
   schedules: Array<any>;
   scheduleDate: any;
 }
 export default function Statistics({ schedules, scheduleDate }: Props) {
+
   const { patients } = usePatients();
-  const { availableSchedules } = useAvailableSchedule(scheduleDate);
+  const { data: availableSchedules } = useQuery({
+    queryKey: ["available-schedules", scheduleDate],
+    queryFn: async () => {
+      const response = await api.get(
+        `/scheduling/available-schedules?date=${scheduleDate}`,
+      );
+      console.log(response.data);
+      return response.data;
+    },
+  });
   const statisticsData = [
     {
       label: "Total Pacientes: ",
