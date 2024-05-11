@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { useQuery } from "@tanstack/react-query";
-import { statisticsData } from "../mocks";
+import Statistics from "../components/Statistics/statistics";
 import { useAuth } from "../hooks/useAuth";
 import { formatDate, BASE_URL, fetchHeaders } from "../utils";
 import React from "react";
@@ -39,27 +39,7 @@ export function Dashboard() {
         </h1>
       </div>
 
-      <div className="flex md:flex-row flex-col lg:items-center items-start justify-between mt-4">
-        {statisticsData.map((item) => (
-          <React.Fragment key={item.label}>
-            <div className=" cursor-pointer md:w-[240px] w-[100%] md:mb-0 mb-3 flex flex-col justify-start gap-3 p-4 bg-white border border-gray-200 rounded-lg shadow ">
-              <div
-                dangerouslySetInnerHTML={{ __html: item.icon }}
-                className="h-8"
-              ></div>
-              <span className="text-[12px]">*Em breve...</span>
-              <div className="flex justify-start items-center gap-1">
-                <span className="text-2xl font-bold text-black dark:text-white">
-                  {item.number}
-                </span>
-                <span className="text-xl font-medium text-gray-700 ">
-                  {item.label}
-                </span>
-              </div>
-            </div>
-          </React.Fragment>
-        ))}
-      </div>
+      <Statistics schedules={data} scheduleDate={scheduleDate}/>
 
       <div className="mt-10">
         <p className="text-xl text-gray-700">
