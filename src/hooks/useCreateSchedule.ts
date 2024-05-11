@@ -8,7 +8,6 @@ export function useCreateSchedule() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
     mutationFn: async ({ body }: any): Promise<any> => {
-      console.log("Body recebido: ", body);
       const response = await api.post("/scheduling", body);
       return response.data;
     },
