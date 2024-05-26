@@ -72,7 +72,7 @@ export function Schedules() {
   }
 
   return (
-    <div className="p-5">
+    <div className="py-5 px-1">
       <h1 className="text-3xl font-bold text-gray-700 mb-10 text-center">
         Agende o horário
       </h1>
@@ -113,7 +113,7 @@ export function Schedules() {
             </Button>
           </div>
 
-          <div className="sm:pr-10">
+          <div className="sm:pr-10 w-[95%]">
             <p className="text-xl mb-2 font-semibold">
               Selecione a data do agendamento
             </p>
