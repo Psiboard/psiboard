@@ -9,7 +9,7 @@ import Card from "../components/Card/card";
 import api from "../services/api";
 
 export function Dashboard() {
-  const { user } = useAuth();
+  const { user }: any | null = useAuth();
   const [selectedDay, setSelectedDay] = useState<Date>();
   const formatedDate = formatDate(new Date());
   const [scheduleDate, setScheduleDate] = useState<string>(formatedDate);

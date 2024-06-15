@@ -17,7 +17,7 @@ export function Schedules() {
   );
   const [selectedSchedule, setSelectedSchedule] = useState("");
   const [selectedPatient, setSelectedPatient] = useState("");
-  const { user } = useAuth();
+  const { user }: any | null = useAuth();
 
   const { createSchedule } = useCreateSchedule();
 

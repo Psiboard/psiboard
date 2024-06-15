@@ -4,7 +4,7 @@ import { BASE_URL, fetchHeaders } from "../utils";
 import { useAuth } from "./useAuth";
 
 export function usePatients() {
-  const { user } = useAuth();
+  const { user }: any | null = useAuth();
   const { data, refetch, isLoading, isFetching, error } = useQuery({
     queryKey: ["patients-list"],
     queryFn: async () => {

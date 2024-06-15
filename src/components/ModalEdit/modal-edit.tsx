@@ -17,7 +17,7 @@ export default function ModalEdit({
   name,
   date,
 }: ModalProps) {
-  const { user } = useAuth();
+  const { user }: any | null = useAuth();
   const [availableSchedules, setAvailableSchedules] = useState([]);
   const [selectedHour, setSelectedHour] = useState("");
   const [rescheduling, setRescheduling] = useState("");
