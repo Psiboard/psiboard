@@ -4,7 +4,7 @@ import { useCreatePatient } from "../hooks/useCreatePatients";
 
 export function Patients() {
   const { register, handleSubmit } = useForm<Patients>();
-  const { user } = useAuth();
+  const { user }: any | null = useAuth();
   const { createPatient } = useCreatePatient();
 
   async function onSubmit(formData: Patients) {
