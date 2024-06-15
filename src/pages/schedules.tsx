@@ -17,20 +17,20 @@ export function Schedules() {
   );
   const [selectedSchedule, setSelectedSchedule] = useState("");
   const [selectedPatient, setSelectedPatient] = useState("");
-  const { user }: any | null = useAuth();
+  const { user } = useAuth();
 
   const { createSchedule } = useCreateSchedule();
 
   // Buscando os clientes do Profissional
   const { data: patientsData } = useQuery({
-    queryKey: ["patients", user.id],
+    queryKey: ["patients", user?.id],
     queryFn: async () => {
-      const response = await api.get(`/professional/${user.id}/patients`, {
+      const response = await api.get(`/professional/${user?.id}/patients`, {
         headers: fetchHeaders(),
       });
       return response.data;
     },
-    enabled: !!user.id,
+    enabled: !!user?.id,
   });
 
   // Buscando horarios disponiveis quando a data muda
@@ -57,7 +57,7 @@ export function Schedules() {
       date: scheduleDate,
       hour: selectedSchedule,
       patient: selectedPatient,
-      professional: user.id,
+      professional: user?.id,
     };
     if (Object.values(body).some((value) => value === "")) {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
