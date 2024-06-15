@@ -2,6 +2,7 @@ import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import ModalEdit from "./modal-edit";
 import { expect, describe, it, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Modal Edit Component", () => {
   const queryClient = new QueryClient();
@@ -9,16 +10,18 @@ describe("Modal Edit Component", () => {
   it("should render render modal when isOpen is true", () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <ModalEdit
-          isOpen={true}
-          onClose={() => {}}
-          hour="10"
-          scheduleId="1"
-          patientId="1"
-          name="Nome do Paciente"
-          date="2024-02-24"
-          phone="99 9999-9999"
-        />
+        <BrowserRouter>
+          <ModalEdit
+            isOpen={true}
+            onClose={() => {}}
+            hour="10"
+            scheduleId="1"
+            patientId="1"
+            name="Nome do Paciente"
+            date="2024-02-24"
+            phone="99 9999-9999"
+          />
+        </BrowserRouter>
       </QueryClientProvider>,
     );
 
@@ -28,16 +31,18 @@ describe("Modal Edit Component", () => {
   it("should not render render modal when isOpen is false", () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <ModalEdit
-          isOpen={false}
-          onClose={() => {}}
-          hour="10"
-          scheduleId="1"
-          patientId="1"
-          name="Nome do Paciente"
-          date="2024-02-24"
-          phone="99 9999-9999"
-        />
+        <BrowserRouter>
+          <ModalEdit
+            isOpen={false}
+            onClose={() => {}}
+            hour="10"
+            scheduleId="1"
+            patientId="1"
+            name="Nome do Paciente"
+            date="2024-02-24"
+            phone="99 9999-9999"
+          />
+        </BrowserRouter>
       </QueryClientProvider>,
     );
 
@@ -48,16 +53,18 @@ describe("Modal Edit Component", () => {
     const handleClose = vi.fn();
     render(
       <QueryClientProvider client={queryClient}>
-        <ModalEdit
-          isOpen={true}
-          onClose={() => {}}
-          hour="10"
-          scheduleId="1"
-          patientId="1"
-          name="Nome do Paciente"
-          date="2024-02-24"
-          phone="99 9999-9999"
-        />
+        <BrowserRouter>
+          <ModalEdit
+            isOpen={true}
+            onClose={() => {}}
+            hour="10"
+            scheduleId="1"
+            patientId="1"
+            name="Nome do Paciente"
+            date="2024-02-24"
+            phone="99 9999-9999"
+          />
+        </BrowserRouter>
       </QueryClientProvider>,
     );
 

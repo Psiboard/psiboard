@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { expect, describe, it, vi } from "vitest";
 import Card from "./card";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
 
 // Mock do hook de exclusão
 const deleteScheduleMock = vi.fn();
@@ -24,7 +25,9 @@ describe("Card Component", () => {
     };
     render(
       <QueryClientProvider client={queryClient}>
-        <Card {...schedule} />
+        <BrowserRouter>
+          <Card {...schedule} />
+        </BrowserRouter>
       </QueryClientProvider>,
     );
 
@@ -46,7 +49,9 @@ describe("Card Component", () => {
     };
     render(
       <QueryClientProvider client={queryClient}>
-        <Card {...schedule} />
+        <BrowserRouter>
+          <Card {...schedule} />
+        </BrowserRouter>
       </QueryClientProvider>,
     );
 
@@ -74,7 +79,9 @@ describe("Card Component", () => {
 
     render(
       <QueryClientProvider client={queryClient}>
-        <Card {...schedule} />
+        <BrowserRouter>
+          <Card {...schedule} />
+        </BrowserRouter>
       </QueryClientProvider>,
     );
 

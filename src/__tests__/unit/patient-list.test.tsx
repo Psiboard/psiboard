@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { expect, describe, it, vi } from "vitest";
 import { PatientsList } from "../../pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
 
 vi.mock("../../../hooks/usePatients", () => ({
   usePatients: () => ({
@@ -29,8 +30,10 @@ describe("PatientsList Component", () => {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
         <PatientsList />
-      </QueryClientProvider>,
+      </BrowserRouter>
+    </QueryClientProvider>,
     );
     expect(screen.getByText("Sua lista de pacientes")).toBeInTheDocument();
     const patientsTable = screen.getByTestId("patients-table");
