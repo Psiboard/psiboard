@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import api from "../../services/api";
 
 interface Props {
-  schedules: Array<any>;
-  scheduleDate: any;
+  schedules: Array<string>;
+  scheduleDate: string;
 }
 export default function Statistics({ schedules, scheduleDate }: Props) {
 
