@@ -7,7 +7,7 @@ import { isAxiosError } from "axios";
 export function useCreateProfessional() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
-    mutationFn: async ({ body }: any): Promise<any> => {
+    mutationFn: async ( body : Profesisonal): Promise<Profesisonal> => {
       console.log("Body recebido no mutationFn():", body);
       const response = await api.post("/professional", body);
       return response.data;

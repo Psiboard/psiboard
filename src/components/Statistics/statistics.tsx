@@ -16,7 +16,6 @@ export default function Statistics({ schedules, scheduleDate }: Props) {
       const response = await api.get(
         `/scheduling/available-schedules?date=${scheduleDate}`,
       );
-      console.log(response.data);
       return response.data;
     },
   });

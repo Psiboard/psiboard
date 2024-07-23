@@ -4,14 +4,16 @@ import { useCreatePatient } from "../hooks/useCreatePatients";
 
 export function Patients() {
   const { register, handleSubmit } = useForm<Patients>();
-  const { user }: any | null = useAuth();
+  const { user } = useAuth();
   const { createPatient } = useCreatePatient();
 
   async function onSubmit(formData: Patients) {
     formData.age = Number(formData.age);
-    const body = { ...formData, professional: user.id };
+    const body: BodyPatientMutation = { ...formData, professional: user?.id };
+
+    console.log(body);
     try {
-      await createPatient({ body });
+      await createPatient(body);
     } catch (error) {
       console.log(error);
     }

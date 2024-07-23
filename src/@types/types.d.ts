@@ -45,3 +45,26 @@ type Patients = {
   phone: string;
   zip_code: string;
 };
+
+type BodyPatientMutation = Patients & {
+  professional: string | undefined;
+};
+
+type BodyScheduleMutation = {
+  date: string;
+  hour: string;
+  patient: string;
+  professional: string | undefined;
+};
+
+type Profesisonal = {
+  email: string;
+  name: string;
+  password: string;
+};
+
+type User = {
+  nome: string;
+  email: string;
+  id: string;
+};

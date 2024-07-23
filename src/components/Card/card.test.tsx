@@ -29,7 +29,7 @@ const renderComponent = () => {
       </BrowserRouter>
     </QueryClientProvider>,
   );
-}
+};
 describe("Card Component", () => {
   it("renders card with correct information", () => {
     renderComponent();

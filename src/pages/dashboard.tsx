@@ -9,16 +9,16 @@ import Card from "../components/Card/card";
 import api from "../services/api";
 
 export function Dashboard() {
-  const { user }: any | null = useAuth();
+  const { user } = useAuth();
   const [selectedDay, setSelectedDay] = useState<Date>();
   const formatedDate = formatDate(new Date());
   const [scheduleDate, setScheduleDate] = useState<string>(formatedDate);
 
   const { data, isFetching, refetch } = useQuery({
-    queryKey: ["schedules", scheduleDate, user.id],
+    queryKey: ["schedules", scheduleDate, user?.id],
     queryFn: async () => {
       const response = await api.get(
-        `${BASE_URL}/scheduling/today/${user.id}?date=${scheduleDate}`,
+        `${BASE_URL}/scheduling/today/${user?.id}?date=${scheduleDate}`,
         { headers: fetchHeaders() },
       );
       return response.data;
@@ -26,7 +26,7 @@ export function Dashboard() {
     enabled: !!scheduleDate,
   });
 
-  function handleChangeCalendarDay(date: any) {
+  function handleChangeCalendarDay(date: Date) {
     setScheduleDate(formatDate(date));
     refetch();
   }
@@ -35,7 +35,7 @@ export function Dashboard() {
     <div className="px-5 mb-5">
       <div>
         <h1 className="text-3xl font-bold text-gray-700 mb-10 mt-5 lg:text-start text-center">
-          Bem vindo, {user.nome}
+          Bem vindo, {user?.nome}
         </h1>
       </div>
 

@@ -48,7 +48,8 @@ export function Schedules() {
     enabled: !!scheduleDate,
   });
 
-  function handleChangeCalendarDay(date: any) {
+  function handleChangeCalendarDay(date: Date) {
+    console.log(date);
     setScheduleDate(formatDate(date));
   }
 
@@ -63,9 +64,10 @@ export function Schedules() {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
       return;
     }
+    
     // Requisição com React Query.
     try {
-      await createSchedule({ body });
+      await createSchedule(body);
     } catch (error) {
       console.log(error);
     }
