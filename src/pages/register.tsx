@@ -35,7 +35,7 @@ export function Register() {
     try {
       // Validar os dados do formulário com Zod
       const body = registerSchema.parse(formData);
-      await createProfessional({ body });
+      await createProfessional(body);
     } catch (error) {
       if (error instanceof ZodError) {
         setFormError(error);

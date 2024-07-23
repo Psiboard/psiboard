@@ -36,7 +36,8 @@ export default function ModalEdit({
     enabled: !!scheduleDate,
   });
 
-  async function handleChangeDate(date: any) {
+  async function handleChangeDate(date: string) {
+    console.log(date);
     let inputDate = formatDateToInput(date);
     setScheduleDate(inputDate);
   }

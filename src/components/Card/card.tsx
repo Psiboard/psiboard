@@ -32,7 +32,7 @@ export default function Card({
 
   async function handleDelete(id: string) {
     try {
-      await deleteSchedule({ id });
+      await deleteSchedule(id);
     } catch (error) {
       console.log(error);
     }

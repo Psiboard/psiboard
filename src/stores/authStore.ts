@@ -1,9 +1,7 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import Cookies from "js-cookie";
 import api from "../services/api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 type ISignIn = {
   email: string;
@@ -11,11 +9,7 @@ type ISignIn = {
 };
 
 type State = {
-  user: {
-    nome: string;
-    email: string;
-    id: number;
-  } | null;
+  user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
   signIn: ({ email, password }: ISignIn) => Promise<void>;

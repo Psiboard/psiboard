@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 export const BASE_URL = import.meta.env.VITE_API_URL;
 
-export const formatDate = (date: any) => {
+export const formatDate = (date: Date) => {
   const dia = String(date.getDate()).padStart(2, "0");
   const mes = String(date.getMonth() + 1).padStart(2, "0");
   const ano = date.getFullYear();
@@ -25,23 +25,8 @@ export const sleep = (delay = 1000) => {
   });
 };
 
-export const formatDateToInput = (date: any) => {
+export const formatDateToInput = (date: string) => {
   const parts = date.split("-");
   const newDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
   return newDate;
-};
-
-export const convertDateObjToString = (date: any) => {
-  let dia = date.getDate();
-  let mes = date.getMonth() + 1;
-  let ano = date.getFullYear();
-  // Formata o dia e o mês para garantir que tenham 2 dígitos
-  if (dia < 10) {
-    dia = "0" + dia;
-  }
-  if (mes < 10) {
-    mes = "0" + mes;
-  }
-  // Retorna a data formatada
-  return dia + "/" + mes + "/" + ano;
 };

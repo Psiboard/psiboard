@@ -5,7 +5,7 @@ import { isAxiosError } from "axios";
 
 export function useDeleteSchedule() {
   const { mutateAsync } = useMutation({
-    mutationFn: async ({ id }: any) => {
+    mutationFn: async (id: string) => {
       await api.delete(`/scheduling/${id}`);
     },
     onSuccess: () => {
