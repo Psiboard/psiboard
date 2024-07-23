@@ -12,25 +12,27 @@ vi.mock("../../../hooks/useDeleteSchedule", () => ({
   }),
 }));
 
+const renderComponent = () => {
+  const queryClient = new QueryClient();
+  const schedule = {
+    scheduleId: "1",
+    patientId: "2",
+    hour: "10:00",
+    name: "John Doe",
+    date: "2024-02-25",
+    phone: "123456789",
+  };
+  render(
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Card {...schedule} />
+      </BrowserRouter>
+    </QueryClientProvider>,
+  );
+}
 describe("Card Component", () => {
   it("renders card with correct information", () => {
-    const queryClient = new QueryClient();
-    const schedule = {
-      scheduleId: "1",
-      patientId: "2",
-      hour: "10:00",
-      name: "John Doe",
-      date: "2024-02-25",
-      phone: "123456789",
-    };
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Card {...schedule} />
-        </BrowserRouter>
-      </QueryClientProvider>,
-    );
-
+    renderComponent();
     expect(screen.getByTestId("hour")).toBeInTheDocument();
     expect(screen.getByTestId("date")).toBeInTheDocument();
     expect(screen.getByTestId("name")).toBeInTheDocument();
@@ -38,23 +40,7 @@ describe("Card Component", () => {
   });
 
   it("opens delete confirmation modal when delete button is clicked", async () => {
-    const queryClient = new QueryClient();
-    const schedule = {
-      scheduleId: "1",
-      patientId: "2",
-      hour: "10:00",
-      name: "John Doe",
-      date: "2024-02-25",
-      phone: "123456789",
-    };
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Card {...schedule} />
-        </BrowserRouter>
-      </QueryClientProvider>,
-    );
-
+    renderComponent();
     const deleteButton = screen.getByTestId("delete-icon");
     fireEvent.click(deleteButton);
 
@@ -66,28 +52,11 @@ describe("Card Component", () => {
   });
 
   it("deletes schedule when delete button in confirmation modal is clicked", async () => {
-    const queryClient = new QueryClient();
-    const schedule = {
-      scheduleId: "1",
-      patientId: "2",
-      hour: "10:00",
-      name: "John Doe",
-      date: "2024-02-25",
-      phone: "123456789",
-    };
-    const id = schedule.scheduleId;
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Card {...schedule} />
-        </BrowserRouter>
-      </QueryClientProvider>,
-    );
-
+    const id = "1";
+    renderComponent();
+    
     const deleteButton = screen.getByTestId("delete-icon");
     fireEvent.click(deleteButton);
-
     const confirmDeleteButton = screen.getByText("Deletar");
     fireEvent.click(confirmDeleteButton);
 

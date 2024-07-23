@@ -82,7 +82,6 @@ export default function Card({
             <span
               className="cursor-pointer"
               data-testid="delete-icon"
-              // onClick={() => handleDelete(scheduleId)}
               onClick={onOpen}
             >
               <svg
