@@ -23,9 +23,9 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ToastContainer />
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <RouteApp />
-        </AuthProvider>
+        {/* </AuthProvider> */}
         <ReactQueryDevtools buttonPosition="bottom-right" position="right" />
       </BrowserRouter>
     </QueryClientProvider>
