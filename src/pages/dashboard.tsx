@@ -3,7 +3,7 @@ import { DayPicker } from "react-day-picker";
 import { useQuery } from "@tanstack/react-query";
 import Statistics from "../components/Statistics/statistics";
 import { useAuth } from "../hooks/useAuth";
-import { formatDate, BASE_URL, fetchHeaders } from "../utils";
+import { formatDate, BASE_URL, fetchHeaders, formatConvetionalDate } from "../utils";
 import React from "react";
 import Card from "../components/Card/card";
 import api from "../services/api";
@@ -18,7 +18,7 @@ export function Dashboard() {
     queryKey: ["schedules", scheduleDate, user?.id],
     queryFn: async () => {
       const response = await api.get(
-        `${BASE_URL}/scheduling/today/${user?.id}?date=${scheduleDate}`,
+        `${BASE_URL}/scheduling/user/${user?.id}/date?date=${scheduleDate}`,
         { headers: fetchHeaders() },
       );
       return response.data;
@@ -39,11 +39,11 @@ export function Dashboard() {
         </h1>
       </div>
 
-      <Statistics schedules={data} scheduleDate={scheduleDate}/>
+      <Statistics schedules={data} scheduleDate={scheduleDate} />
 
       <div className="mt-10">
         <p className="text-xl text-gray-700">
-          Seus agendamentos do dia: {scheduleDate}
+          Seus agendamentos do dia: {formatConvetionalDate(scheduleDate)}
         </p>
         {/* {isFetching && <Loading type="spinner" />} */}
         <div className="flex w-full md:h-auto md:flex-row flex-col md:gap-0 gap-10 md:items-start items-center md:mt-0 mt-5">
@@ -54,10 +54,8 @@ export function Dashboard() {
                   <Card
                     scheduleId={schedule.id}
                     hour={schedule.hour}
+                    patientId={schedule?.patient_id}
                     date={schedule.date}
-                    name={schedule?.patient?.name}
-                    phone={schedule?.patient?.phone}
-                    patientId={schedule?.patient?.id}
                   />
                 ))}
               </React.Fragment>

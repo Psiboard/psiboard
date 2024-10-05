@@ -1,55 +1,38 @@
 import { Select } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import React from "react";
 import { useAuth } from "../hooks/useAuth";
-import { fetchHeaders, formatDate } from "../utils";
-import api from "../services/api";
+import { formatDate } from "../utils";
 import { Button } from "@chakra-ui/react";
 import { toast } from "react-toastify";
-import { useQuery } from "@tanstack/react-query";
 import { useCreateSchedule } from "../hooks/useCreateSchedule";
+import { usePatients } from "../hooks/usePatients";
+import { useAvailableSchedules } from "../hooks/useAvailableSchedules";
 
 export function Schedules() {
+  const { user } = useAuth();
+
+  // States
   const [selectedDay, setSelectedDay] = useState<Date>();
   const [scheduleDate, setScheduleDate] = useState<string>(
     formatDate(new Date()),
   );
   const [selectedSchedule, setSelectedSchedule] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState("");
-  const { user } = useAuth();
+  const [selectedPatient, setSelectedPatient] = useState("")
 
+  // Hooks
   const { createSchedule } = useCreateSchedule();
-
-  // Buscando os clientes do Profissional
-  const { data: patientsData } = useQuery({
-    queryKey: ["patients", user?.id],
-    queryFn: async () => {
-      const response = await api.get(`/professional/${user?.id}/patients`, {
-        headers: fetchHeaders(),
-      });
-      return response.data;
-    },
-    enabled: !!user?.id,
+  const { patients } = usePatients();
+  const { availableSchedules, refetch } = useAvailableSchedules({
+    scheduleDate,
   });
 
-  // Buscando horarios disponiveis quando a data muda
-  const { data: schedulesData } = useQuery({
-    queryKey: ["schedules", selectedDay, scheduleDate],
-    queryFn: async () => {
-      const response = await api.get(
-        `/scheduling/available-schedules?date=${scheduleDate}`,
-        {
-          headers: fetchHeaders(),
-        },
-      );
-      return response.data;
-    },
-    enabled: !!scheduleDate,
-  });
+  useEffect(() => {
+    refetch();
+  }, [scheduleDate]);
 
   function handleChangeCalendarDay(date: Date) {
-    console.log(date);
     setScheduleDate(formatDate(date));
   }
 
@@ -57,15 +40,15 @@ export function Schedules() {
     const body = {
       date: scheduleDate,
       hour: selectedSchedule,
-      patient: selectedPatient,
-      professional: user?.id,
+      type: "MARCACAO",
+      patient_id: selectedPatient,
+      user_id: user?.id,
     };
     if (Object.values(body).some((value) => value === "")) {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
       return;
     }
-    
-    // Requisição com React Query.
+
     try {
       await createSchedule(body);
     } catch (error) {
@@ -89,7 +72,7 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedPatient(event.target.value)}
               >
-                {patientsData?.map((patient: Patients) => (
+                {patients?.map((patient: Patients) => (
                   <React.Fragment key={patient?.id}>
                     <option value={patient?.id}>{patient?.name}</option>
                   </React.Fragment>
@@ -103,7 +86,7 @@ export function Schedules() {
                 className="w-auto flex items-center justify-center"
                 onChange={(event) => setSelectedSchedule(event.target.value)}
               >
-                {schedulesData?.map((schedules: string) => (
+                {availableSchedules?.map((schedules: string) => (
                   <React.Fragment key={schedules}>
                     <option value={schedules}>{schedules}</option>
                   </React.Fragment>

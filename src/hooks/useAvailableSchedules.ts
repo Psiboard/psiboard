@@ -1,27 +1,24 @@
+import { useAuth } from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
 import api from "../services/api";
 import { BASE_URL, fetchHeaders } from "../utils";
-import { useAuth } from "./useAuth";
 
-export function usePatients() {
+export function useAvailableSchedules({ scheduleDate }: any) {
   const { user } = useAuth();
-  const { data, refetch, isLoading, isFetching, error } = useQuery({
-    queryKey: ["patients", user?.id],
+  const { data, refetch } = useQuery({
+    queryKey: ["available-schedules", scheduleDate],
     queryFn: async () => {
       const response = await api.get(
-        `${BASE_URL}/patients/user/${user?.id}/patients`,
+        `${BASE_URL}/scheduling/user/${user?.id}/available?date=${scheduleDate}`,
         { headers: fetchHeaders() },
       );
       return response.data;
     },
-    enabled: !!user?.id
+    enabled: !!scheduleDate,
   });
 
   return {
-    patients: data ?? [],
+    availableSchedules: data ?? [],
     refetch,
-    isLoading,
-    isFetching,
-    error,
   };
 }

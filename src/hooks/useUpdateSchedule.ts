@@ -2,11 +2,13 @@ import { useMutation } from "@tanstack/react-query";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
+import { BASE_URL } from "../utils";
 
-export function useUpdatePatient() {
+
+export function useUpdateSchedule() {
   const { mutateAsync } = useMutation({
     mutationFn: async ({ body, scheduleId }: any): Promise<any> => {
-      const response = await api.patch(`/scheduling/${scheduleId}`, body);
+      const response = await api.put(`${BASE_URL}/scheduling/${scheduleId}`, body);
       return response.data;
     },
     onSuccess: () => {
@@ -23,6 +25,6 @@ export function useUpdatePatient() {
   });
 
   return {
-    updatePatient: mutateAsync,
+    updateSchedule: mutateAsync,
   };
 }

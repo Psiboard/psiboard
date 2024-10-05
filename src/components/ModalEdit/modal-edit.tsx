@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Select } from "@chakra-ui/react";
-import { useState } from "react";
-import { formatDateToInput } from "../../utils";
-import api from "../../services/api";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
-import { useUpdatePatient } from "../../hooks/useUpdateSchedule";
+import { useUpdateSchedule } from "../../hooks/useUpdateSchedule";
+import { useAvailableSchedules } from "../../hooks/useAvailableSchedules";
 
 export default function ModalEdit({
   isOpen,
@@ -18,28 +16,18 @@ export default function ModalEdit({
   date,
 }: ModalProps) {
   const { user }: any | null = useAuth();
-  const [availableSchedules, setAvailableSchedules] = useState([]);
   const [selectedHour, setSelectedHour] = useState("");
   const [rescheduling, setRescheduling] = useState("");
-  const [scheduleDate, setScheduleDate] = useState<undefined | string>("");
-  const { updatePatient } = useUpdatePatient();
+  const [scheduleDate, setScheduleDate] = useState<undefined | string>(date);
+  const { updateSchedule } = useUpdateSchedule();
+  const { availableSchedules, refetch } = useAvailableSchedules({scheduleDate});
 
-  const {} = useQuery({
-    queryKey: ["available-schedules"],
-    queryFn: async () => {
-      const response = await api.get(
-        `/scheduling/available-schedules?date=${scheduleDate}`,
-      );
-      setAvailableSchedules(response.data);
-      return response.data;
-    },
-    enabled: !!scheduleDate,
-  });
+  useEffect(() => {
+    refetch();
+  }, [scheduleDate]);
 
-  async function handleChangeDate(date: string) {
-    console.log(date);
-    let inputDate = formatDateToInput(date);
-    setScheduleDate(inputDate);
+  async function handleChangeDate(date: any) {
+    setScheduleDate(date);
   }
 
   async function submitUpdateSchedule() {
@@ -47,17 +35,15 @@ export default function ModalEdit({
       date: scheduleDate,
       hour: selectedHour,
       type: rescheduling,
-      id: scheduleId,
-      patient: patientId,
-      professional: user.id,
+      user_id: user.id,
+      patient_id: patientId,
     };
     if (Object.values(body).some((value) => value === "")) {
       toast.error("Por favor! Selecione a DATA, o PACIENTE, e o HORÁRIO.");
       return;
     }
-
     try {
-      await updatePatient({ body, scheduleId });
+      await updateSchedule({ body, scheduleId });
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +78,6 @@ export default function ModalEdit({
               {name} - {hour}h
             </p>
             <p className="text-xl mb-4 font-medium">Atual data: {date}</p>
-            <p>{selectedHour}</p>
 
             <div className="flex justify-between items-center mb-6">
               <label htmlFor="">Indique uma nova data</label>
@@ -124,17 +109,20 @@ export default function ModalEdit({
               </Select>
             </div>
 
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center gap-10 mb-6">
               <label htmlFor="">Marque o campo de remarcação</label>
+              <div className="flex justify-items-end flex-row items-end">
               <input
                 type="checkbox"
                 id="remarcacao"
                 name="remarcacao"
-                value="remarcacao"
+                value="REMARCACAO"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setRescheduling(e.target.value)
                 }
               />
+              <span className="flex text-[14px] text-red-600 font-extrabold text-right">*</span>
+              </div>
             </div>
           </div>
           <div className=" flex justify-between pt-0 pb-8 px-8">

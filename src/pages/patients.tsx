@@ -9,9 +9,11 @@ export function Patients() {
 
   async function onSubmit(formData: Patients) {
     formData.age = Number(formData.age);
-    const body: BodyPatientMutation = { ...formData, professional: user?.id };
+    const body: Patients = {
+      ...formData,
+      user_id: user?.id,
+    };
 
-    console.log(body);
     try {
       await createPatient(body);
     } catch (error) {
@@ -96,7 +98,7 @@ export function Patients() {
               </div>
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-3">
               <label
                 htmlFor="last-name"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -115,27 +117,7 @@ export function Patients() {
               </div>
             </div>
 
-            <div className="col-span-3">
-              <label
-                htmlFor="street-address"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Endereço
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  id="address"
-                  autoComplete="address"
-                  placeholder="Ex: Rua jardim de orquideas, n°0, Bairro das Flores, Cidade-Estado"
-                  {...register("adress", { required: true })}
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-1">
+            <div className="sm:col-span-3">
               <label
                 htmlFor="postal-code"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -155,26 +137,104 @@ export function Patients() {
               </div>
             </div>
 
+            <div className="col-span-2">
+              <label
+                htmlFor="street-address"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Rua
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  id="street"
+                  autoComplete="street"
+                  placeholder="Ex: Rua jardim de orquideas, n°0"
+                  {...register("street", { required: true })}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="col-span-2">
+              <label
+                htmlFor="street-address"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Bairro
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  id="address"
+                  autoComplete="address"
+                  placeholder="Ex: Bairro das flores"
+                  {...register("district", { required: true })}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="col-span-1">
+              <label
+                htmlFor="street-address"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Cidade
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  id="address"
+                  autoComplete="address"
+                  placeholder="Ex: São Paulo"
+                  {...register("state", { required: true })}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="col-span-1">
+              <label
+                htmlFor="street-address"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Estado
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  id="address"
+                  autoComplete="address"
+                  placeholder="Ex: São Paulo"
+                  {...register("city", { required: true })}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
             <div className="col-span-full">
               <label
                 htmlFor="about"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-base font-medium leading-6 text-gray-900"
               >
                 Informações Adicionais
               </label>
               <div className="mt-2">
                 <textarea
                   id="info_add"
-                  rows={3}
+                  rows={5}
                   placeholder="Use esse campo para adicionar informações que considere relevantes sobre o paciente"
-                  {...register("info_add", { required: true })}
+                  {...register("additional_info", { required: true })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   defaultValue={""}
+                  required
                 />
               </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">
-                Informações que podem ser consideradas relevantes.
-              </p>
             </div>
           </div>
         </div>

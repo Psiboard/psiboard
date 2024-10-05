@@ -12,19 +12,14 @@ import {
 } from "@chakra-ui/react";
 
 import { useDeleteSchedule } from "../../hooks/useDeleteSchedule";
+import { usePatient } from "../../hooks/usePatient";
 
-export default function Card({
-  scheduleId,
-  patientId,
-  hour,
-  name,
-  date,
-  phone,
-}: CardProps) {
+export default function Card({ scheduleId, patientId, hour, date }: CardProps) {
   const cancelRef = useRef<any>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
   const { deleteSchedule } = useDeleteSchedule();
+  const { patient } = usePatient(patientId);
 
   function handleClose() {
     setOpen(false);
@@ -44,22 +39,29 @@ export default function Card({
         key={scheduleId}
         className="h-auto md:gap-0 gap-5 flex md:flex-row flex-col items-center bg-gray-100 rounded-[8px] w-[100%] mb-3 mt-1 "
       >
-        <span
+        <div
           data-testid="hour"
-          className="bg-[#02969c] sm:h-[120px] h-[80px] md:w-auto w-full text-[#fff] flex items-center md:mr-4 p-[0.8rem] md:rounded-[8px_0_0_8px] rounded-md"
+          className="bg-[#02969c] sm:h-[140px] h-[80px] md:w-auto w-full text-[#fff] flex flex-col items-start gap-1 md:mr-4 p-[0.8rem] md:rounded-[8px_0_0_8px] rounded-md"
         >
-          {hour}h
-        </span>
+          <p data-testid="name" className="text-white text-[1.2rem]">
+            Paciente: {patient?.name}
+          </p>
+          <hr/>
+          <p>Horario: {hour}h</p>
+        </div>
         <div className="flex md:flex-row flex-col justify-between md:items-center w-full md:p-0 px-2">
           <div className="flex flex-col gap-1 py-2">
-            <p data-testid="name" className="text-gray-700 text-[1.2rem]">
-              {name}
-            </p>
-            <p data-testid="date" className="text-gray-700 text-[1.2rem]">
-              {date}
-            </p>
             <p data-testid="phone" className="text-gray-700 text-[1.2rem]">
-              Telefone: {phone}
+              Contato: {patient?.phone}
+            </p>
+
+            <p data-testid="phone" className="text-gray-700 text-[1.2rem]">
+              Email: {patient?.email}
+            </p>
+
+            <p data-testid="phone" className="text-gray-700 text-[1.2rem]">
+              Endereço: {patient?.street}, {patient?.district}, {patient?.city},{" "}
+              {patient?.state}
             </p>
           </div>
           <div className="flex md:flex-col md:mr-5 gap-5 md:py-0 py-3 md:justify-center justify-around">
@@ -105,12 +107,12 @@ export default function Card({
       <ModalEdit
         isOpen={open}
         onClose={handleClose}
-        name={name}
+        name={patient?.name}
         scheduleId={scheduleId}
         patientId={patientId}
         hour={hour}
         date={date}
-        phone={phone}
+        phone={patient?.phone}
       />
 
       <AlertDialog

@@ -5,11 +5,14 @@ import custome from "../assets/custome.png";
 import { useCreateProfessional } from "../hooks/useCreateProfessional";
 import Loading from "../components/Loading/loading";
 import { useAuth } from "../hooks/useAuth";
+import { Select } from "@chakra-ui/react";
 
 const registerSchema = z.object({
   name: z.string(),
   email: z.string().email("Por favor, insira um endereço de e-mail válido."),
   password: z.string().min(6, "A senha deve conter pelo menos 6 caracteres."),
+  contact: z.string(),
+  role: z.enum(["ADMIN", "PROFESSIONAL"]),
 });
 
 export function Register() {
@@ -19,6 +22,8 @@ export function Register() {
     name: "",
     email: "",
     password: "",
+    contact: "",
+    role: "",
   });
   const [formError, setFormError] = useState<ZodError | null>(null);
 
@@ -32,6 +37,8 @@ export function Register() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const body = registerSchema.parse(formData);
+    console.log(body);
     try {
       // Validar os dados do formulário com Zod
       const body = registerSchema.parse(formData);
@@ -121,6 +128,31 @@ export function Register() {
             <div>
               <div className="flex items-center justify-between">
                 <label
+                  htmlFor="contact"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Contato
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="contact"
+                  name="contact"
+                  type="text"
+                  data-testid="contact"
+                  value={formData.contact}
+                  onChange={handleInputChange}
+                  autoComplete="current-contact"
+                  placeholder="(XX) XXXX-XXXX"
+                  required
+                  className="block w-full  h-[40px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
@@ -141,6 +173,22 @@ export function Register() {
                   className="block w-full  h-[40px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+            </div>
+
+            <div>
+              <label>Marque a opção do perfil</label>
+              <Select
+                placeholder="Selecione o perfil"
+                className="w-auto flex items-center justify-center"
+                id="role"
+                name="role"
+                data-testid="role"
+                value={formData.role}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="PROFESSIONAL">Perfil profissional</option>
+              </Select>
             </div>
 
             <div>

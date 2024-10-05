@@ -3,13 +3,13 @@ import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
+import { BASE_URL } from "../utils";
 
 export function useCreateProfessional() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
     mutationFn: async ( body : Profesisonal): Promise<Profesisonal> => {
-      console.log("Body recebido no mutationFn():", body);
-      const response = await api.post("/professional", body);
+      const response = await api.post(`${BASE_URL}/auth/register`, body);
       return response.data;
     },
     onSuccess: () => {

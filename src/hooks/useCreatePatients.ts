@@ -3,12 +3,13 @@ import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
+import { BASE_URL } from "../utils";
 
 export function useCreatePatient() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
-    mutationFn: async (body : BodyPatientMutation): Promise<BodyPatientMutation> => {
-      const response = await api.post("/patient", body);
+    mutationFn: async (body : Patients): Promise<Patients> => {
+      const response = await api.post(`${BASE_URL}/patients`, body);
       return response.data;
     },
     onSuccess: () => {

@@ -31,7 +31,6 @@ export function PatientsList() {
                 <Th>Idade</Th>
                 <Th>Email</Th>
                 <Th>Telefone</Th>
-                <Th>Endereço</Th>
                 {/* <Th>Ações</Th> */}
               </Tr>
             </Thead>
@@ -43,7 +42,6 @@ export function PatientsList() {
                     <Td>{patient.age}</Td>
                     <Td>{patient.email}</Td>
                     <Td>{patient.phone}</Td>
-                    <Td>{patient.adress}</Td>
                     {/* <Td className="flex gap-2">
                       <Button
                         colorScheme="teal"

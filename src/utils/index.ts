@@ -3,11 +3,11 @@ import Cookies from "js-cookie";
 export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const formatDate = (date: Date) => {
-  const dia = String(date.getDate()).padStart(2, "0");
-  const mes = String(date.getMonth() + 1).padStart(2, "0");
-  const ano = date.getFullYear();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
 
-  return `${dia}/${mes}/${ano}`;
+  return `${year}-${month}-${day}`;
 };
 
 export const fetchHeaders = () => {
@@ -25,7 +25,7 @@ export const sleep = (delay = 1000) => {
   });
 };
 
-export const formatDateToInput = (date: string) => {
+export const formatConvetionalDate = (date: string) => {
   const parts = date.split("-");
   const newDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
   return newDate;
