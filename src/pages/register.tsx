@@ -27,7 +27,7 @@ export function Register() {
   });
   const [formError, setFormError] = useState<ZodError | null>(null);
 
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
