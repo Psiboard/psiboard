@@ -52,7 +52,13 @@ describe("Register Component", () => {
     await userEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
 
     await waitFor(() => {
-      expect(signUpMock).toHaveBeenCalled();
+      expect(signUpMock).toHaveBeenCalledWith({
+        name: "Usuário de teste",
+        email: "teste@teste.com",
+        password: "teste123",
+        contact: "987654321",
+        role: "PROFESSIONAL",
+      });
     });
   });
 
