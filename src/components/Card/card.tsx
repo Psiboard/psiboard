@@ -55,11 +55,11 @@ export default function Card({ scheduleId, patientId, hour, date }: CardProps) {
               Contato: {patient?.phone}
             </p>
 
-            <p data-testid="phone" className="text-gray-700 text-[1.2rem]">
+            <p data-testid="email" className="text-gray-700 text-[1.2rem]">
               Email: {patient?.email}
             </p>
 
-            <p data-testid="phone" className="text-gray-700 text-[1.2rem]">
+            <p data-testid="address" className="text-gray-700 text-[1.2rem]">
               Endereço: {patient?.street}, {patient?.district}, {patient?.city},{" "}
               {patient?.state}
             </p>

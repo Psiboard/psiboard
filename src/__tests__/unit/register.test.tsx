@@ -35,6 +35,12 @@ describe("Register Component", () => {
     const passwordInput = screen.getByTestId("password");
     await userEvent.type(passwordInput, "teste123");
 
+    const contactInput = screen.getByTestId("contact");
+    await userEvent.type(contactInput, "987654321");
+
+    const roleSelect = screen.getByTestId("role");
+    await userEvent.selectOptions(roleSelect, "PROFESSIONAL");
+
     await userEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
 
     await waitFor(() => {

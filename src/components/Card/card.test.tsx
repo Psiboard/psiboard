@@ -34,9 +34,10 @@ describe("Card Component", () => {
   it("renders card with correct information", () => {
     renderComponent();
     expect(screen.getByTestId("hour")).toBeInTheDocument();
-    expect(screen.getByTestId("date")).toBeInTheDocument();
     expect(screen.getByTestId("name")).toBeInTheDocument();
     expect(screen.getByTestId("phone")).toBeInTheDocument();
+    expect(screen.getByTestId("email")).toBeInTheDocument();
+    expect(screen.getByTestId("address")).toBeInTheDocument();
   });
 
   it("opens delete confirmation modal when delete button is clicked", async () => {
