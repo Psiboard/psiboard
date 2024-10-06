@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage",
     "cy:open": "cypress open",
     "lint": "eslint --ext .ts,.tsx,.test.tsx,.test.ts src",
     "lint:fix": "eslint --ext .ts,.tsx,.test.tsx,.test.ts src --fix",
