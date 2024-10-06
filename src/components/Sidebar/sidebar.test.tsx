@@ -16,7 +16,7 @@ describe("Sidebar Component", () => {
   const queryClient = new QueryClient();
 
   it("should be render correctly Sidebar component in width greater than 1024", async () => {
-    useWindowSizeSpy.mockReturnValue({width: 1025});
+    useWindowSizeSpy.mockReturnValue({ width: 1025 });
     render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
@@ -31,7 +31,7 @@ describe("Sidebar Component", () => {
   });
 
   it("should be render correctly Sidebar component in width less than 1024", async () => {
-    useWindowSizeSpy.mockReturnValue({width: 1000});
+    useWindowSizeSpy.mockReturnValue({ width: 1000 });
     render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
@@ -46,7 +46,7 @@ describe("Sidebar Component", () => {
   });
 
   it("should be render Menu Items", async () => {
-    useWindowSizeSpy.mockReturnValue({width: 1025});
+    useWindowSizeSpy.mockReturnValue({ width: 1025 });
     render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>

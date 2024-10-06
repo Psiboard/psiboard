@@ -24,7 +24,7 @@ export default function App() {
       <BrowserRouter>
         <ToastContainer />
         {/* <AuthProvider> */}
-          <RouteApp />
+        <RouteApp />
         {/* </AuthProvider> */}
         <ReactQueryDevtools buttonPosition="bottom-right" position="right" />
       </BrowserRouter>

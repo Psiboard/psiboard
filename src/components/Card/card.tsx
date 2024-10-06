@@ -46,7 +46,7 @@ export default function Card({ scheduleId, patientId, hour, date }: CardProps) {
           <p data-testid="name" className="text-white text-[1.2rem]">
             Paciente: {patient?.name}
           </p>
-          <hr/>
+          <hr />
           <p>Horario: {hour}h</p>
         </div>
         <div className="flex md:flex-row flex-col justify-between md:items-center w-full md:p-0 px-2">

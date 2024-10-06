@@ -26,7 +26,7 @@ type ModalProps = {
 };
 
 type Patients = {
-  id:string;
+  id: string;
   name: string;
   age: number;
   email: string;

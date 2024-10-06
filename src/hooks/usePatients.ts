@@ -14,7 +14,7 @@ export function usePatients() {
       );
       return response.data;
     },
-    enabled: !!user?.id
+    enabled: !!user?.id,
   });
 
   return {

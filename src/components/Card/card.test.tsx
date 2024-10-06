@@ -55,7 +55,7 @@ describe("Card Component", () => {
   it("deletes schedule when delete button in confirmation modal is clicked", async () => {
     const id = "1";
     renderComponent();
-    
+
     const deleteButton = screen.getByTestId("delete-icon");
     fireEvent.click(deleteButton);
     const confirmDeleteButton = screen.getByText("Deletar");

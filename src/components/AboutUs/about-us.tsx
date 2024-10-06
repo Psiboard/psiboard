@@ -31,7 +31,9 @@ export default function About() {
             sublocações de salas.
           </p>
         </div>
-        <p className="mt-5 text-slate-500">*Dados ilustrativos, em breve os dados reais...</p>
+        <p className="mt-5 text-slate-500">
+          *Dados ilustrativos, em breve os dados reais...
+        </p>
         <div className="mx-auto mt-1 max-w-2xl lg:mx-0 lg:max-w-none">
           <dl className="flex flex-col gap-3 lg:flex-row lg:justify-between justify-start">
             {stats.map((stat) => (

@@ -76,7 +76,7 @@ export function AuthProvider({ children }: IAuthProvider) {
         signOut,
         user,
         isAuthenticated,
-        loading
+        loading,
       }}
     >
       {children}

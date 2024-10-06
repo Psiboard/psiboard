@@ -8,7 +8,7 @@ import { BASE_URL } from "../utils";
 export function useCreatePatient() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
-    mutationFn: async (body : Patients): Promise<Patients> => {
+    mutationFn: async (body: Patients): Promise<Patients> => {
       const response = await api.post(`${BASE_URL}/patients`, body);
       return response.data;
     },

@@ -20,7 +20,9 @@ export default function ModalEdit({
   const [rescheduling, setRescheduling] = useState("");
   const [scheduleDate, setScheduleDate] = useState<undefined | string>(date);
   const { updateSchedule } = useUpdateSchedule();
-  const { availableSchedules, refetch } = useAvailableSchedules({scheduleDate});
+  const { availableSchedules, refetch } = useAvailableSchedules({
+    scheduleDate,
+  });
 
   useEffect(() => {
     refetch();
@@ -112,16 +114,18 @@ export default function ModalEdit({
             <div className="flex justify-between items-center gap-10 mb-6">
               <label htmlFor="">Marque o campo de remarcação</label>
               <div className="flex justify-items-end flex-row items-end">
-              <input
-                type="checkbox"
-                id="remarcacao"
-                name="remarcacao"
-                value="REMARCACAO"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setRescheduling(e.target.value)
-                }
-              />
-              <span className="flex text-[14px] text-red-600 font-extrabold text-right">*</span>
+                <input
+                  type="checkbox"
+                  id="remarcacao"
+                  name="remarcacao"
+                  value="REMARCACAO"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setRescheduling(e.target.value)
+                  }
+                />
+                <span className="flex text-[14px] text-red-600 font-extrabold text-right">
+                  *
+                </span>
               </div>
             </div>
           </div>

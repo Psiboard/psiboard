@@ -30,10 +30,10 @@ describe("PatientsList Component", () => {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <PatientsList />
-      </BrowserRouter>
-    </QueryClientProvider>,
+        <BrowserRouter>
+          <PatientsList />
+        </BrowserRouter>
+      </QueryClientProvider>,
     );
     expect(screen.getByText("Sua lista de pacientes")).toBeInTheDocument();
     const patientsTable = screen.getByTestId("patients-table");

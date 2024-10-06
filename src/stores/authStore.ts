@@ -30,7 +30,7 @@ export const useAuthStore = create<State>()(
           const userData = {
             email: data.email,
             nome: data.name,
-            id: data.id
+            id: data.id,
           };
           Cookies.set("user@data", JSON.stringify(userData), {
             expires: 1 / 24,
@@ -51,7 +51,7 @@ export const useAuthStore = create<State>()(
     }),
     {
       name: "auth-storage",
-      storage: createJSONStorage(() => sessionStorage)
-    }
-  )
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
 );

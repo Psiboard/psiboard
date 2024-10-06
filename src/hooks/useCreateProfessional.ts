@@ -8,7 +8,7 @@ import { BASE_URL } from "../utils";
 export function useCreateProfessional() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
-    mutationFn: async ( body : Profesisonal): Promise<Profesisonal> => {
+    mutationFn: async (body: Profesisonal): Promise<Profesisonal> => {
       const response = await api.post(`${BASE_URL}/auth/register`, body);
       return response.data;
     },

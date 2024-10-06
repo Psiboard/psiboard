@@ -7,7 +7,9 @@ import { isAxiosError } from "axios";
 export function useCreateSchedule() {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
-    mutationFn: async ( body: BodyScheduleMutation): Promise<BodyScheduleMutation> => {
+    mutationFn: async (
+      body: BodyScheduleMutation,
+    ): Promise<BodyScheduleMutation> => {
       const response = await api.post("/scheduling", body);
       return response.data;
     },

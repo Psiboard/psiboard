@@ -3,7 +3,12 @@ import { DayPicker } from "react-day-picker";
 import { useQuery } from "@tanstack/react-query";
 import Statistics from "../components/Statistics/statistics";
 import { useAuth } from "../hooks/useAuth";
-import { formatDate, BASE_URL, fetchHeaders, formatConvetionalDate } from "../utils";
+import {
+  formatDate,
+  BASE_URL,
+  fetchHeaders,
+  formatConvetionalDate,
+} from "../utils";
 import React from "react";
 import Card from "../components/Card/card";
 import api from "../services/api";
