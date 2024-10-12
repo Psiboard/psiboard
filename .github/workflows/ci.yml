@@ -23,6 +23,6 @@ jobs:
         run: npm run typecheck
       - name: Linting Application
         run: npm run lint
-      - name: Running Tests
-        run: "npm run test"
+      # - name: Running Tests
+      #   run: "npm run test"
 

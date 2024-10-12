@@ -1,8 +1,6 @@
 import React from "react";
 import { usePatients } from "../../hooks/usePatients";
 import { useAvailableSchedules } from "../../hooks/useAvailableSchedules";
-import { useQuery } from "@tanstack/react-query";
-import api from "../../services/api";
 
 interface Props {
   schedules: Array<string>;
