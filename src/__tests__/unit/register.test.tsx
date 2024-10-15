@@ -10,7 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const signUpMock = vi.fn();
 vi.mock("../../hooks/useCreateProfessional", () => ({
   useCreateProfessional: () => ({
-    createProfessional: signUpMock,
+    createProfessional: signUpMock, 
   }),
 }));
 
@@ -32,8 +32,14 @@ describe("Register Component", () => {
     const emailInput = screen.getByTestId("email");
     await userEvent.type(emailInput, "teste@teste.com");
 
+    const contactInput = screen.getByTestId("contact");
+    await userEvent.type(contactInput, "987654321");
+
     const passwordInput = screen.getByTestId("password");
     await userEvent.type(passwordInput, "teste123");
+
+    const roleSelect = screen.getByTestId("role");
+    await userEvent.selectOptions(roleSelect, "PROFESSIONAL");
 
     await userEvent.click(screen.getByRole("button", { name: /Cadastrar/i }));
 

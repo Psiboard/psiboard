@@ -19,7 +19,7 @@ export function Schedules() {
     formatDate(new Date()),
   );
   const [selectedSchedule, setSelectedSchedule] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState("")
+  const [selectedPatient, setSelectedPatient] = useState("");
 
   // Hooks
   const { createSchedule } = useCreateSchedule();
